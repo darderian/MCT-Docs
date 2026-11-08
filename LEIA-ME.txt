@@ -1,0 +1,29 @@
+PACOTE CONSOLIDADO — IMECANIC / ESTADO DA TÉCNICA
+
+Conteúdo:
+- artigo_estado_da_tecnica_corrigido.tex: fonte LaTeX corrigida.
+- artigo_estado_da_tecnica_corrigido.pdf: PDF recompilado.
+- patentes_aprovadas_76_corrigido.csv: base de 76 documentos com PAT15 corrigido.
+- familias_consolidadas_auditadas_corrigido.csv: família F0156 corrigida.
+- auditoria_depositantes.csv: resumo da reclassificação setorial.
+- pitch_3_minutos.tex/.pdf: apresentação Beamer de 6 slides.
+- roteiro_oral_3_minutos.txt: fala de apoio para apresentação.
+
+Correções aplicadas:
+1. Conclusão recomposta: escape de percentual 15,8\% e respostas QPS1–QPS6/QPP presentes.
+2. Depositantes: Ford PAT02/PAT74; State Farm PAT56; Allstate 10 famílias; IBM PAT46/PAT50/PAT75; GM Cruise PAT18; IAA PAT24; Nextev PAT48; My Car Fix PAT49.
+3. Seguradoras: 14 famílias (18,4%); Allstate direta 10, Allstate + Esurance 11; montadoras 5; TI/mobilidade/serviços 31.
+4. G06Q: lista refeita a partir da coluna CIP/CPC, total 68 famílias.
+5. PAT15/F0156: CIP registrada no nível de subclasse como G06Q; G07C; CPC mantida vazia, pois a exportação bruta não fornece CPC.
+6. URLs com xurl; margens mantidas em 3 cm (esquerda/topo) e 2 cm (direita/baixo). Quadro de seleção e tabela anual receberam colunas com largura controlada.
+7. Ressalva de escopo da busca no INPI e ameaça de viés na identificação da natureza do depositante.
+
+Validação técnica:
+- Artigo recompilado com pdflatex em duas passagens; PDF com 30 páginas.
+- Apresentação recompilada com pdflatex; PDF com 6 slides.
+- Contagem G06Q conferida: 68/76.
+
+ATENÇÃO SOBRE O GITHUB:
+O endereço informado foi atualizado em todas as referências do artigo: https://github.com/darderian/MCT-Docs. Na consulta realizada nesta sessão, o GitHub exibiu “This repository is empty”. Portanto, o endereço existe e está público, mas os arquivos deste pacote ainda precisam ser enviados ao repositório. Não foi afirmado no artigo que os arquivos já estejam publicados nele.
+
+Nota metodológica: PAT15 foi corrigida para a informação efetivamente sustentada pela exportação bruta do Patentscope: CIP em nível de subclasse (G06Q e G07C), sem atribuição de CPC inexistente. Não se inventou um subgrupo.

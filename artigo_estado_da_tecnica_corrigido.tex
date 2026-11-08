@@ -1,0 +1,622 @@
+% ============================================================
+% ARTIGO NOTA 2 - MAPEAMENTO SISTEMATICO DO ESTADO DA TECNICA (PATENTES)
+% Versão Final Auditada (Modo Banca - 100% Completo):
+% - Coautora presente e margens ABNT (left=3cm, right=2cm, top=3cm, bottom=2cm)
+% - Indentação de primeiro parágrafo (indentfirst) e citações/referências 100% ABNT
+% - Todas as contagens de QPS1 a QPS6 reconciliadas exatamente com patentes_aprovadas_76.csv
+% - Livro de códigos (C1 a C4) explícito na Seção 3.5 e Seção 5 expandida (7 ameaças)
+% - URL do repositório GitHub visível e clicável (sem macro \linkrepo literal)
+% ============================================================
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{times}
+\usepackage{amsmath}
+\usepackage{indentfirst}
+\usepackage[a4paper,left=3cm,right=2cm,top=3cm,bottom=2cm]{geometry}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xurl}
+\usepackage{url}
+\usepackage{setspace}
+\onehalfspacing
+\emergencystretch=3em
+
+\addto\captionsbrazil{\renewcommand{\tablename}{Quadro}\renewcommand{\figurename}{Gráfico}}
+\addto\captionsbrazilian{\renewcommand{\tablename}{Quadro}\renewcommand{\figurename}{Gráfico}}
+
+\title{\textbf{Mapeamento Sistemático do Estado da Técnica em Documentos de Patentes sobre Plataformas de Serviços Automotivos sob Demanda}}
+\author{Diogo Antônio Rodrigues Dias \\ \texttt{diogo.dias@edu.unirio.br} \and
+Maria Augusta Silveira Netto Nunes \\ \texttt{gutanunes@uniriotec.br}\\[4pt]
+Universidade Federal do Estado do Rio de Janeiro (UNIRIO)\\
+Disciplina de Metodologia Científica e Tecnológica}
+\date{08 de novembro de 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent\textbf{Resumo.}
+\textbf{[Contexto]} Cerca de 70\% da informação tecnológica avançada encontra-se disponível apenas em documentos de patente, o que torna o levantamento do estado da técnica uma etapa necessária para orientar o desenvolvimento de plataformas digitais de serviços sob demanda, como o IMecanic, voltado à intermediação de serviços automotivos.
+\textbf{[Objetivo]} Este artigo tem como objetivo realizar um mapeamento sistemático do estado da técnica em documentos de patentes depositadas sobre despacho, roteirização, agendamento e formação de preços em plataformas de serviços automotivos sob demanda e sistemas correlatos de gerenciamento de serviços de campo.
+\textbf{[Método]} Foram seguidas as diretrizes de mapeamento sistemático de Petersen et al., com uma questão de pesquisa primária, cinco questões secundárias estatísticas e uma questão secundária técnica. As buscas foram realizadas entre 03/11/2026 e 08/11/2026 nas bases Patentscope (OMPI), Espacenet (EPO) e INPI, sem restrição de período. Foram recuperados 1.851 registros brutos (789 no Espacenet, 260 no Patentscope e 802 no INPI), consolidados em 1.661 famílias e pedidos únicos (876 famílias internacionais e 785 pedidos nacionais). Após a aplicação dos critérios de inclusão e exclusão sobre título e resumo, restaram 98 documentos (96 internacionais e 2 nacionais), dos quais 76 atingiram a nota de corte nas questões de qualidade ($\text{QQ} \ge 3{,}5$, sendo 40 com nota máxima $4{,}0$ e 36 com nota $3{,}5$).
+\textbf{[Resultados]} Os depósitos aprovados distribuem-se entre 2000 e 2026, concentrando 59 famílias (77,6\%) entre 2014 e 2024, com pico em 2020 (9 famílias). Como escritório receptor (QPS2), lideram Estados Unidos (41 famílias; 53,9\%), China (18; 23,7\%) e Coreia do Sul (13; 17,1\%), com apenas um pedido aprovado depositado no Brasil (PAT76). Quanto ao país de origem do depositante (QPS3), predominam Estados Unidos (37 famílias; 48,7\%), China (17; 22,4\%) e Coreia do Sul (12; 15,8\%). Empresas isoladas ou com inventores detêm 50 famílias (65,8\%), inventores individuais detêm 22 (28,9\%) e instituições de ensino detêm 4 (5,3\%), com destaque para as subclasses G06Q (68 famílias; 89,5\%), H04W (21; 27,6\%), G06F (16; 21,1\%) e G08G (14; 18,4\%). Tecnicamente (QPS6), 28 famílias tratam de despacho de socorro e reboque (36,8\%), 18 de intermediação e agendamento de oficinas (23,7\%), 17 de orçamentação automatizada de reparos (22,4\%) e 13 de despacho e precificação em serviços de campo análogos (17,1\%).
+\textbf{[Conclusão/Contribuição]} O estudo indica que os depósitos internacionais concentram-se no despacho de socorro vinculado a seguradoras e na estimativa automatizada de custos de reparo, enquanto na base nacional do INPI observou-se baixa incidência de pedidos sobre despacho dinâmico de mecânicos móveis, oferecendo subsídios para as decisões de projeto do IMecanic.
+
+\medskip
+\noindent\textbf{Palavras-chave:} Mapeamento sistemático; Documentos de patente; Estado da técnica; Plataformas sob demanda; Field Service Management.
+
+\bigskip
+\noindent\textbf{Abstract.}
+\textbf{[Context]} About 70\% of advanced technological information is found only in patent documents, making prior art mapping (\textit{estado da técnica}) an essential step to guide the development of on-demand digital platforms such as IMecanic, focused on automotive service intermediation.
+\textbf{[Objective]} This article aims to systematically map the state of the art in filed patent documents addressing dispatching, routing, scheduling, and pricing in on-demand automotive service platforms and related field service management systems.
+\textbf{[Method]} The mapping guidelines of Petersen et al. were followed, using one primary research question, five statistical secondary questions, and one technical secondary question. Searches were conducted between 03/11/2026 and 08/11/2026 in Patentscope (WIPO), Espacenet (EPO), and INPI databases without date restrictions. A total of 1,851 raw records were retrieved (789 from Espacenet, 260 from Patentscope, and 802 from INPI), consolidated into 1,661 unique patent families and applications (876 international families and 785 Brazilian applications). After applying inclusion and exclusion criteria to titles and abstracts, 98 documents remained (96 international and 2 domestic), of which 76 met the quality threshold ($\text{QQ} \ge 3.5$, with 40 scoring $4.0$ and 36 scoring $3.5$).
+\textbf{[Results]} Approved filings span from 2000 to 2026, with 59 families (77.6\%) concentrated between 2014 and 2024 and a peak in 2020 (9 families). As receiving offices (QPS2), the United States (41 families; 53.9\%), China (18; 23.7\%), and South Korea (13; 17.1\%) lead, with only one approved application filed in Brazil (PAT76). Regarding applicant country of origin (QPS3), the United States (37 families; 48.7\%), China (17; 22.4\%), and South Korea (12; 15.8\%) predominate. Corporate applicants (alone or with inventors) hold 50 families (65.8\%), individual inventors hold 22 (28.9\%), and academic institutions hold 4 (5.3\%), mainly classified under IPC/CPC subclasses G06Q (68 families; 89.5\%), H04W (21; 27.6\%), G06F (16; 21.1\%), and G08G (14; 18.4\%). Technically (QPS6), 28 families address roadside assistance and towing dispatch (36.8\%), 18 address repair shop intermediation and scheduling (23.7\%), 17 address automated repair cost estimation (22.4\%), and 13 address dispatching and dynamic pricing in analogous field services (17.1\%).
+\textbf{[Conclusion/Contribution]} The mapping shows that international filings focus on insurer-linked roadside dispatch and automated repair estimation, whereas the Brazilian INPI database shows low filing activity for dynamic mobile mechanic dispatching, supporting engineering and intellectual property decisions for IMecanic.
+
+\medskip
+\noindent\textbf{Keywords:} Systematic mapping; Patent documents; State of the art in patents; On-demand platforms; Field Service Management.
+\end{abstract}
+
+\newpage
+\section{Introdução}
+
+O mercado de serviços automotivos de varejo é descentralizado e marcado por assimetria de informação: o condutor em situação de emergência ou manutenção corretiva raramente dispõe de meios imediatos para aferir a disponibilidade, a qualificação e o preço de um profissional próximo, enquanto mecânicos independentes e oficinas convivem com ociosidade operacional e baixa visibilidade digital. Plataformas computacionais de intermediação sob demanda, inspiradas nos sistemas de mobilidade urbana (\textit{ridesourcing}), têm sido investigadas na literatura científica como alternativa para reduzir esse tipo de ineficiência de alocação (WANG; YANG, 2019). O IMecanic é uma plataforma concebida para conectar condutores a mecânicos autônomos e oficinas, cuja construção exige decisões de arquitetura sobre alocação de chamados, roteirização, agendamento e formação de preços.
+
+Na etapa anterior deste projeto de pesquisa, um Mapeamento Sistemático da Literatura (MSL) sobre o estado da arte científico analisou 69 estudos primários voltados a plataformas de gerenciamento de serviços de campo (\textit{Field Service Management} -- FSM) e serviços sob demanda (DIAS, 2026). Os resultados daquele levantamento indicaram que 82,6\% dos estudos analisados adotam arquiteturas em nuvem, microsserviços e/ou APIs REST, 73,9\% utilizam formulações do problema de roteamento de veículos (\textit{Vehicle Routing Problem} -- VRP) e 42,0\% empregam precificação dinâmica e/ou agendamento em janela móvel (DIAS, 2026). Aquele levantamento sistematizou a produção acadêmica em periódicos e conferências, restando investigar quais soluções tecnológicas já são objeto de pedidos de proteção por propriedade industrial.
+
+No Brasil, o estado da técnica\footnote{A escolha do termo ``estado da técnica'' alinha-se à definição adotada pela legislação brasileira sobre matéria de Propriedade Industrial (BRASIL, 1996).} é constituído por tudo aquilo tornado acessível ao público antes da data de depósito do pedido de patente, por descrição escrita ou oral, por uso ou qualquer outro meio, no Brasil ou no exterior (Lei nº 9.279/1996, art. 11, §1º) (BRASIL, 1996). Estima-se que cerca de 70\% da informação tecnológica avançada esteja disponível exclusivamente em documentos de patente (NUNES; PINHEIRO-MACHADO, 2021; ARAUJO et al., 2018). Mapear documentos patentários permite, assim, identificar tendências industriais, reconhecer os principais depositantes e evitar a duplicação de esforços em soluções já divulgadas. Cabe destacar que este trabalho analisa patentes \textbf{depositadas} (independentemente de concessão vigente) e considera que os direitos de propriedade industrial possuem natureza estritamente \textbf{territorial}. No âmbito de sistemas computacionais, a legislação brasileira não considera invenção os métodos comerciais e os programas de computador em si (art. 10, incisos III e V) (BRASIL, 1996), de modo que pedidos envolvendo plataformas de software dependem da descrição de uma solução com efeito técnico associado.
+
+Consultas preliminares em bases científicas (Scopus, IEEE Xplore e Google Scholar) e nos diretórios de propriedade industrial (INPI, Patentscope e Espacenet) indicaram a ausência de mapeamentos sistemáticos secundários dedicados especificamente a caracterizar o estado da técnica em patentes sobre plataformas de serviços automotivos e socorro mecânico sob demanda. Na literatura acadêmica, as revisões existentes examinam modelos matemáticos de \textit{ridesourcing} (WANG; YANG, 2019) e problemas gerais de serviços de campo (DIAS, 2026), sem mapear os depósitos patentários voltados à assistência rodoviária, à intermediação de oficinas e à estimativa automatizada de custos de reparo. Para preencher essa lacuna, o presente trabalho fundamenta-se em dois eixos: (i) adota como fonte primária documentos de patentes depositadas em bases nacional e internacionais para caracterizar a produção tecnológica em plataformas de serviços automotivos sob demanda e sistemas correlatos de serviços de campo; e (ii) analisa a evolução temporal, a distribuição geográfica, o perfil dos titulares, a classificação internacional e as categorias funcionais das soluções descritas nos documentos selecionados.
+
+O \textbf{objetivo} deste artigo é realizar um mapeamento sistemático do estado da técnica em documentos de patentes depositadas sobre plataformas de serviços automotivos sob demanda e sistemas correlatos de serviços de campo, de modo a subsidiar as decisões de engenharia e de propriedade intelectual do projeto IMecanic. A \textbf{contribuição} do estudo consiste na sistematização auditável de uma base inicial de 1.851 registros brutos (1.661 famílias e pedidos únicos), complementando o mapeamento do estado da arte científico realizado na primeira etapa da pesquisa (DIAS, 2026).
+
+Além desta Introdução, o artigo está organizado da seguinte forma: a Seção 2 apresenta a fundamentação teórica; a Seção 3 descreve a metodologia, o protocolo de busca e a consolidação dos dados; a Seção 4 apresenta e discute os resultados das questões de pesquisa; a Seção 5 examina as ameaças à validade e limitações do estudo; e a Seção 6 apresenta as conclusões e trabalhos futuros.
+
+\section{Fundamentação Teórica}
+
+Esta seção apresenta os conceitos de plataformas sob demanda, de propriedade industrial e de Classificação Internacional de Patentes (CIP) que fundamentam o mapeamento.
+
+\subsection{Plataformas de serviços sob demanda e abstração de domínio}
+Plataformas digitais sob demanda operam como mercados de dois lados que conectam solicitantes a prestadores de serviço com base em localização geográfica, disponibilidade temporal, qualificação técnica e preço (WANG; YANG, 2019; DIAS, 2026). No setor automotivo, a intermediação compreende desde o acionamento emergencial de guinchos e socorro mecânico na via até o agendamento em oficinas e a cotação remota de reparos. Sob a ótica computacional, a alocação de técnicos móveis ou veículos de assistência compartilha restrições espaciais e temporais com os sistemas de \textit{Field Service Management} (FSM), o que justifica considerar conjuntamente patentes do domínio automotivo e patentes análogas de gerenciamento de equipes de campo.
+
+\subsection{Patente e estado da técnica}
+A patente é um título de propriedade temporária sobre uma invenção ou modelo de utilidade, outorgado pelo Estado ao inventor ou titular em troca da revelação pública do conteúdo técnico da matéria (BRASIL, 1996; NUNES; PINHEIRO-MACHADO, 2021). Pelo princípio da territorialidade, a eventual exclusividade comercial restringe-se ao país ou região onde o pedido foi depositado e concedido. Para requerer proteção em múltiplas jurisdições, titulares recorrem frequentemente ao Tratado de Cooperação em Matéria de Patentes (\textit{Patent Cooperation Treaty} -- PCT), gerido pela Organização Mundial da Propriedade Intelectual (OMPI/WIPO), que unifica o depósito inicial antes da entrada nas fases nacionais. Conforme o art. 30 da Lei nº 9.279/1996 (BRASIL, 1996), os pedidos permanecem sob sigilo por dezoito meses contados da data de depósito ou da prioridade mais antiga, razão pela qual depósitos recentes ainda não estão integralmente visíveis nas bases públicas.
+
+\subsection{Classificação Internacional de Patentes (CIP e CPC)}
+Os documentos de patente são indexados tecnicamente pela Classificação Internacional de Patentes (CIP, ou IPC em inglês), estruturada em cinco níveis hierárquicos: seção (uma letra de A a H), classe (dois dígitos), subclasse (uma letra), grupo principal (um a três dígitos antes da barra) e subgrupo (dígitos após a barra) (WORLD INTELLECTUAL PROPERTY ORGANIZATION, 2026a). Complementarmente, escritórios como o Europeu (EPO) e o Norte-Americano (USPTO) adotam a Classificação Cooperativa de Patentes (\textit{Cooperative Patent Classification} -- CPC), que estende a CIP com subgrupos adicionais (como \texttt{G08G 1/202} para despacho de veículos e assistência rodoviária e \texttt{G06Q 30/0283} para determinação de preços e estimativa de custos). O Quadro~\ref{tab:cip} ilustra os cinco níveis da CIP para o código \texttt{G08G 1/123}.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Estrutura hierárquica da CIP exemplificada pelo código G08G 1/123}\label{tab:cip}
+\begin{tabular}{lll}
+\toprule
+\textbf{Nível hierárquico} & \textbf{Código} & \textbf{Descrição oficial na CIP}\\
+\midrule
+Seção & G & Física\\
+Classe & 08 & Sinalização\\
+Subclasse & G & Sistemas de controle de tráfego\\
+Grupo principal & 1/00 & Sistemas de controle de tráfego para veículos rodoviários\\
+Subgrupo & /123 & Indicação da posição de veículos (localização/rastreamento)\\
+\bottomrule
+\end{tabular}
+
+\smallskip
+\footnotesize Fonte: adaptado de (WORLD INTELLECTUAL PROPERTY ORGANIZATION, 2026a).
+\end{table}
+
+\section{Metodologia}
+
+O estudo seguiu as diretrizes de Mapeamento Sistemático propostas por Petersen et al. (2008), Kitchenham (2004) e Petersen, Vakkalanka e Kuzniarz (2015), adaptadas à busca de informação tecnológica em patentes conforme Felizardo et al. (2017), Silva et al. (2018) e Nunes e Pinheiro-Machado (2021). O protocolo foi executado em cinco etapas: (1) definição das questões de pesquisa (Seção 3.1); (2) identificação das bases consultadas (Seção 3.2); (3) calibração e confecção das \textit{strings} de busca (Seção 3.3); (4) definição dos critérios de seleção e de avaliação da qualidade (Seção 3.4); e (5) coleta, consolidação por família, triagem e categorização dos dados (Seção 3.5), cujos resultados são analisados na Seção 4.
+
+\subsection{Definição das questões de pesquisa}
+Foi definida uma Questão de Pesquisa Primária (QPP), desdobrada em seis Questões de Pesquisa Secundárias (QPS) divididas em dois blocos: cinco questões estatísticas (QPS1 a QPS5) e uma questão técnica (QPS6). O Quadro~\ref{tab:qp} apresenta as questões, os dados extraídos e a importância de cada uma.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Questões de pesquisa, dados a serem extraídos e importância}\label{tab:qp}
+\begin{tabular}{p{4.3cm}p{4.2cm}p{4.7cm}}
+\toprule
+\textbf{Questão de Pesquisa Primária} & \textbf{Dados a serem extraídos} & \textbf{Importância da questão}\\
+\midrule
+\textbf{QPP:} Qual o panorama de pedidos de patente sobre plataformas de serviços sob demanda, em especial de serviços automotivos? & Informações sobre a produção tecnológica encontrada nos documentos de patentes sobre o tema & Subsidiar pesquisadores, desenvolvedores e empresas na identificação das tecnologias protegidas e lacunas de desenvolvimento\\
+\midrule
+\textbf{Questão Secundária -- Estatística} & \textbf{Dados a serem extraídos} & \textbf{Importância da questão}\\
+\midrule
+\textbf{QPS1:} Qual o ano do depósito/prioridade da patente? & Ano da prioridade mais antiga (ou do depósito, quando ausente) & Acompanhar a evolução temporal dos depósitos\\
+\textbf{QPS2:} Qual o país em que a patente foi depositada? & País ou escritório regional que recebeu o depósito da família & Indicar os mercados prioritários de proteção da tecnologia\\
+\textbf{QPS3:} Qual o país de origem do depositante da patente? & País de sede ou residência de quem depositou a patente & Indicar a nacionalidade do detentor da tecnologia\\
+\textbf{QPS4:} A patente foi depositada por empresa, pessoa física ou instituição de ensino e pesquisa? & Natureza jurídica do depositante e principais titulares por setor & Identificar os principais atores empresariais, individuais e acadêmicos\\
+\textbf{QPS5:} Quais foram as CIP utilizadas para o depósito da patente? & Códigos de subclasse e grupo principal/subgrupo CIP e CPC & Identificar a classificação técnica das patentes relacionadas ao tema\\
+\midrule
+\textbf{Questão Secundária -- Técnica} & \textbf{Dados a serem extraídos} & \textbf{Importância da questão}\\
+\midrule
+\textbf{QPS6:} Quais soluções técnicas de despacho, agendamento, orçamentação e precificação são descritas nos documentos? & Objeto técnico descrito no título e resumo, enquadrado nas categorias funcionais C1 a C4 & Confrontar o estado da técnica com o estado da arte antes de definir a arquitetura do IMecanic\\
+\bottomrule
+\end{tabular}
+
+\smallskip
+\footnotesize Fonte: elaborado pelos autores.
+\end{table}
+
+\subsection{Identificação das bases consultadas}
+O levantamento abrangeu patentes depositadas sem restrição inicial de período. Como a patente de invenção vigora por até vinte anos contados do depósito (Lei nº 9.279/1996, art. 40) (BRASIL, 1996), um recorte restrito a cinco ou dez anos descartaria documentos ainda vigentes ou relevantes para compreender a evolução do setor. As buscas e a consolidação ocorreram entre 03/11/2026 e 08/11/2026 em três bases oficiais de patentes, complementadas por uma base pública para recuperação de resumos ausentes:
+\begin{enumerate}
+    \item \textbf{Patentscope (OMPI/WIPO):} base internacional da Organização Mundial da Propriedade Intelectual, que indexa depósitos PCT e coleções nacionais (WORLD INTELLECTUAL PROPERTY ORGANIZATION, 2026b);
+    \item \textbf{Espacenet (EPO):} base do Escritório Europeu de Patentes, que agrupa documentos por família de patentes (\textit{patent family}) e fornece classificações CIP e CPC detalhadas (EUROPEAN PATENT OFFICE, 2026);
+    \item \textbf{INPI (Portal pePI):} base oficial do Instituto Nacional da Propriedade Industrial, que reúne os pedidos depositados no Brasil (INSTITUTO NACIONAL DA PROPRIEDADE INDUSTRIAL, 2026); e
+    \item \textbf{Google Patents Public Data (via Google BigQuery):} base pública mantida pelo Google em parceria com o EPO, utilizada exclusivamente de forma complementar na Seção 3.5 para recuperar o texto dos resumos das famílias exportadas do Espacenet (GOOGLE, 2026).
+\end{enumerate}
+
+\subsection{Calibração e confecção das \textit{strings} de busca}
+A construção das expressões de busca ocorreu em duas fases. Na Fase 1 (03/11/2026), foram testadas doze variantes preliminares ($V_1$ a $V_{12}$) a partir dos termos do estado da arte (DIAS, 2026), conforme detalhado no Quadro~\ref{tab:calibracao}. Na base do INPI, buscas no campo resumo com frases exatas entre aspas ($V_1, V_2, V_4$ e $V_6$) retornaram zero registros, enquanto palavras soltas sem delimitadores ($V_3$ e $V_5$) retornaram mais de 726 mil processos devido à ausência de suporte da interface pePI para expressões compostas aninhadas. No Patentscope e no Espacenet, testaram-se formulações amplas ($V_7$ e $V_{10}$), intermediárias ($V_8$ e $V_{12}$) e restritivas com interseção simultânea de três blocos por \texttt{AND} ($V_9$ e $V_{11}$), verificando-se que a combinação estrita de $V_1 + V_9 + V_{11}$ restringia o retorno a apenas 19 registros primários (11 no Patentscope, 8 no Espacenet e 0 no INPI).
+
+\begin{table}[htbp]
+\centering\small
+\caption{Calibração preliminar das doze variantes de busca ($V_1$ a $V_{12}$) na Fase 1}\label{tab:calibracao}
+\begin{tabular}{p{2.3cm}p{2.7cm}p{6.1cm}c}
+\toprule
+\textbf{Variante} & \textbf{Base e Campo} & \textbf{Estratégia / Restrição testada} & \textbf{Resultados}\\
+\midrule
+$V_1, V_2, V_4, V_6$ & INPI (Resumo) & Expressões compostas exatas entre aspas & 0\\
+$V_3, V_5$ & INPI (Resumo) & Palavras soltas sem delimitadores de frase & $> 726.000$\\
+$V_7$ & Patentscope (\texttt{FP}) & Busca ampla com sinônimos gerais de serviços & 250\\
+$V_8$ & Patentscope (\texttt{FP}) & Busca intermediária de assistência rodoviária & 64\\
+$V_9$ & Patentscope (\texttt{FP}) & Interseção restrita de 3 blocos (\texttt{AND}) & 11\\
+$V_{10}$ & Espacenet (\texttt{ta}) & Busca ampla nos campos título e resumo & 214\\
+$V_{11}$ & Espacenet (\texttt{ta}) & Interseção restrita de 3 blocos (\texttt{AND}) & 8\\
+$V_{12}$ & Espacenet (\texttt{ta}) & Busca combinada com classe CPC restrita & 29\\
+\bottomrule
+\end{tabular}
+
+\smallskip
+\footnotesize Fonte: elaborado pelos autores com dados da calibração realizada em 03/11/2026.
+\end{table}
+
+Para superar a limitação de cobertura das variantes restritivas e contornar a sintaxe do buscador nacional, executou-se na Fase 2 (consolidada em 08/11/2026) a busca definitiva com \textit{strings} expandidas em blocos temáticos unidos por \texttt{OR}, cobrindo: (i) assistência na estrada, guincho e socorro veicular combinados a despacho ou requisição de serviço; (ii) mecânicos móveis, oficinas e manutenção veicular combinados a plataformas sob demanda, agendamento e dispositivos móveis; (iii) precificação dinâmica, cotação e estimativa de custos de reparo automotivo; (iv) códigos CPC específicos no Espacenet (\texttt{G06Q10/20}, \texttt{G08G1/202} e \texttt{G06Q30/0283}); e (v) serviços de campo (\textit{field service}) geolocalizados. No INPI, utilizaram-se 28 pares e trincas booleanas com truncamento por radical (\texttt{*}), executados separadamente nos campos Título (28 pedidos) e Resumo (774 pedidos). O Quadro~\ref{tab:string} apresenta as \textit{strings} finais utilizadas.
+
+\begingroup\footnotesize
+\begin{longtable}{p{2.0cm}p{1.9cm}p{9.8cm}}
+\caption{\textit{Strings} de busca ampliadas utilizadas em cada base (Fase 2 -- Coleta Definitiva)}\label{tab:string}\\
+\toprule
+\textbf{Base} & \textbf{Campos} & \textbf{\textit{String} de busca executada}\\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Base} & \textbf{Campos} & \textbf{\textit{String} de busca executada (continuação)}\\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+Patentscope & \texttt{FP} (\textit{Front Page}) & {\ttfamily\sloppy FP:((("roadside assistance" OR "roadside service" OR "roadside rescue" OR "tow truck" OR "towing service" OR "breakdown service" OR "vehicle breakdown") AND (dispatch OR dispatching OR dispatcher OR "service request" OR "request for service" OR "service provider")) OR (("mobile mechanic" OR mechanic OR "vehicle repair" OR "car repair" OR "auto repair" OR "repair service") AND ("on-demand" OR marketplace OR booking OR appointment OR scheduling OR "service provider") AND ("mobile application" OR smartphone OR "mobile device" OR server)) OR ((vehicle OR automobile) AND (repair OR maintenance OR towing OR roadside) AND ("dynamic pricing" OR "price estimate" OR "estimated price" OR "price quote" OR "surge pricing" OR "cost estimate")) OR (("field service" OR "service technician" OR "mobile workforce") AND (dispatch OR dispatching OR "work order" OR scheduling) AND ("real-time" OR geolocation OR GPS)) OR (("on-demand service" OR "service marketplace") AND ("service provider" OR technician) AND (dispatch OR dispatching OR matching OR scheduling OR pricing)))}\\
+\midrule
+Espacenet & \texttt{ti}, \texttt{ta}, \texttt{cpc} & {\ttfamily\sloppy (((ti="roadside assistance" OR ti="roadside service" OR ti="roadside rescue" OR ti="tow truck" OR ti="towing service" OR ti="breakdown service") AND (ta="dispatch\textasteriskcentered" OR ta="service request" OR ta="service provider" OR ta="mobile device" OR ta="server")) OR ((ti="mechanic" OR ti="vehicle repair" OR ti="car repair" OR ti="auto repair" OR ti="repair shop" OR ti="vehicle maintenance") AND (ta="on-demand" OR ta="booking" OR ta="appointment" OR ta="scheduling" OR ta="marketplace" OR ta="service provider" OR ta="dispatch\textasteriskcentered") AND (ta="mobile device" OR ta="smartphone" OR ta="server" OR ta="mobile application")) OR ((ti="vehicle" OR ti="car" OR ti="automobile" OR ti="roadside" OR ti="towing") AND (ta="dynamic pricing" OR ta="price estimate" OR ta="estimated price" OR ta="surge pricing" OR ta="price determination" OR ta="quote")) OR (cpc="G06Q10/20" AND (ta="vehicle" OR ta="car" OR ta="automobile") AND (ta="mechanic" OR ta="repair shop" OR ta="service provider" OR ta="technician" OR ta="roadside" OR ta="tow\textasteriskcentered") AND (ta="request\textasteriskcentered" OR ta="dispatch\textasteriskcentered" OR ta="scheduling" OR ta="booking")) OR (cpc="G08G1/202" AND (ta="roadside" OR ta="tow\textasteriskcentered" OR ta="breakdown" OR ta="repair" OR ta="mechanic" OR ta="service provider" OR ta="technician")) OR (cpc="G06Q30/0283" AND (ta="vehicle" OR ta="automobile" OR ta="car") AND (ta="repair" OR ta="tow\textasteriskcentered" OR ta="roadside" OR ta="mechanic" OR ta="maintenance")) OR ((ti="field service" OR ti="service technician") AND (ta="dispatch\textasteriskcentered" OR ta="scheduling" OR ta="work order" OR ta="routing")) OR ((ti="on-demand service" OR ti="service marketplace") AND (ta="dispatch\textasteriskcentered" OR ta="matching" OR ta="scheduling" OR ta="pricing")))}\\
+\midrule
+INPI & Título e Resumo & {\ttfamily\sloppy \textasteriskcentered GUINCH\textasteriskcentered\ AND \textasteriskcentered DESPACH\textasteriskcentered\ OR \textasteriskcentered GUINCH\textasteriskcentered\ AND \textasteriskcentered SOLICIT\textasteriskcentered\ OR \textasteriskcentered GUINCH\textasteriskcentered\ AND \textasteriskcentered CHAMAD\textasteriskcentered\ OR \textasteriskcentered GUINCH\textasteriskcentered\ AND \textasteriskcentered LOCALIZ\textasteriskcentered\ OR \textasteriskcentered REBOQU\textasteriskcentered\ AND \textasteriskcentered LOCALIZ\textasteriskcentered\ OR \textasteriskcentered REBOQU\textasteriskcentered\ AND \textasteriskcentered SOLICIT\textasteriskcentered\ OR \textasteriskcentered SOCORR\textasteriskcentered\ AND \textasteriskcentered VEICUL\textasteriskcentered\ OR \textasteriskcentered ASSISTENC\textasteriskcentered\ AND \textasteriskcentered RODOVIAR\textasteriskcentered\ OR \textasteriskcentered MECANIC\textasteriskcentered\ AND \textasteriskcentered APLICATIV\textasteriskcentered\ OR \textasteriskcentered MECANIC\textasteriskcentered\ AND \textasteriskcentered SOLICIT\textasteriskcentered\ OR \textasteriskcentered MECANIC\textasteriskcentered\ AND \textasteriskcentered PLATAFORM\textasteriskcentered\ OR \textasteriskcentered OFICIN\textasteriskcentered\ AND \textasteriskcentered AGENDAMENT\textasteriskcentered\ OR \textasteriskcentered OFICIN\textasteriskcentered\ AND \textasteriskcentered PLATAFORM\textasteriskcentered\ OR \textasteriskcentered OFICIN\textasteriskcentered\ AND \textasteriskcentered SOFTWAR\textasteriskcentered\ OR \textasteriskcentered MANUTENC\textasteriskcentered\ AND \textasteriskcentered VEICUL\textasteriskcentered\ AND \textasteriskcentered APLICATIV\textasteriskcentered\ OR \textasteriskcentered MANUTENC\textasteriskcentered\ AND \textasteriskcentered VEICUL\textasteriskcentered\ AND \textasteriskcentered PLATAFORM\textasteriskcentered\ OR \textasteriskcentered DESPACH\textasteriskcentered\ AND \textasteriskcentered VEICUL\textasteriskcentered\ OR \textasteriskcentered AGENDAMENT\textasteriskcentered\ AND \textasteriskcentered VEICUL\textasteriskcentered\ AND \textasteriskcentered SERVIC\textasteriskcentered\ OR \textasteriskcentered PRECIFIC\textasteriskcentered\ AND \textasteriskcentered VEICUL\textasteriskcentered\ OR \textasteriskcentered ROTEIRIZ\textasteriskcentered\ AND \textasteriskcentered VEICUL\textasteriskcentered\ OR \textasteriskcentered CHAMAD\textasteriskcentered\ AND \textasteriskcentered VEICUL\textasteriskcentered\ AND \textasteriskcentered GEOLOCALIZ\textasteriskcentered\ OR \textasteriskcentered TARIF\textasteriskcentered\ AND \textasteriskcentered DINAMIC\textasteriskcentered\ OR \textasteriskcentered TAXI\textasteriskcentered\ AND \textasteriskcentered APLICATIV\textasteriskcentered\ OR \textasteriskcentered MOTORISTA\textasteriskcentered\ AND \textasteriskcentered APLICATIV\textasteriskcentered\ OR \textasteriskcentered CORRIDA\textasteriskcentered\ AND \textasteriskcentered APLICATIV\textasteriskcentered\ OR \textasteriskcentered PASSAGEIR\textasteriskcentered\ AND \textasteriskcentered SOLICIT\textasteriskcentered\ AND \textasteriskcentered VEICUL\textasteriskcentered\ OR \textasteriskcentered PRESTADOR\textasteriskcentered\ AND \textasteriskcentered SERVIC\textasteriskcentered\ AND \textasteriskcentered GEOLOCALIZ\textasteriskcentered\ OR \textasteriskcentered DEMANDA\textasteriskcentered\ AND \textasteriskcentered SERVIC\textasteriskcentered\ AND \textasteriskcentered APLICATIV\textasteriskcentered}\\
+\addlinespace
+\multicolumn{3}{p{13.7cm}}{\footnotesize Fonte: elaborado pelos autores. No INPI, a mesma expressão foi aplicada aos campos Título (28 pedidos) e Resumo (774 pedidos). No Espacenet, a consulta foi exportada em dois recortes de publicação (até 2019, com 353 resultados; e de 2020 a 2026, com 436 resultados) devido ao limite de exportação de 500 registros por arquivo.}\\
+\end{longtable}
+\endgroup
+
+\subsection{Critérios de seleção e avaliação da qualidade}
+Para selecionar os documentos relevantes foram definidos um Critério de Inclusão (CI01) e cinco Critérios de Exclusão (CE01 a CE05), aplicados sobre título, resumo e metadados de classificação (Quadro~\ref{tab:cice}). Para avançar à etapa de qualidade, o documento deve atender ao CI01 e não incorrer em nenhum CE.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Critérios de inclusão (CI) e de exclusão (CE)}\label{tab:cice}
+\begin{tabular}{p{1.2cm}p{12.1cm}}
+\toprule
+\textbf{ID} & \textbf{Critério de inclusão (CI)}\\
+\midrule
+CI01 & O documento de patente deve descrever sistema, método ou arquitetura computacional de despacho, roteirização, agendamento, intermediação ou estimativa de preços/custos para serviços sob demanda, em especial de socorro, reparo e manutenção veicular ou serviços de campo correlatos\\
+\midrule
+\textbf{ID} & \textbf{Critério de exclusão (CE)}\\
+\midrule
+CE01 & Documento redigido em idioma diferente de inglês ou português e sem tradução disponível nas bases consultadas\\
+CE02 & Documento relacionado exclusivamente a área distinta de Sistemas de Informação, Computação ou Telemática Aplicada (ex.: dispositivos mecânicos de reboque ou ferramentas manuais)\\
+CE03 & Documento que não aborde processos computacionais de despacho, agendamento, intermediação ou precificação/orçamentação de serviços (ex.: recarga de baterias de veículos elétricos, redes ópticas, avaliação de revenda de seminovos ou controle semafórico)\\
+CE04 & Documento duplicado entre as bases, publicação secundária ou pedido de continuação pertencente a família de patentes já contabilizada\\
+CE05 & Documento sem resumo acessível para leitura e avaliação técnica\\
+\bottomrule
+\end{tabular}
+
+\smallskip
+\footnotesize Fonte: elaborado pelos autores.
+\end{table}
+
+As famílias e pedidos elegíveis passaram pela avaliação de quatro Questões de Qualidade (QQ1 a QQ4), apresentadas no Quadro~\ref{tab:qq}, seguindo a estrutura padronizada nos modelos da disciplina (NUNES; PINHEIRO-MACHADO, 2021). Cada questão recebe 1,0 (Sim), 0,5 (Parcialmente) ou 0,0 (Não), somando até 4,0 pontos, com nota de corte estabelecida em 3,5 pontos (87,5\% de aderência). Na operacionalização das notas, documentos que descrevem de forma clara a plataforma (QQ1 = 1,0), respondem às questões do mapeamento (QQ2 = 1,0) e aplicam-se diretamente ao setor automotivo (QQ4 = 1,0) necessitam detalhar no resumo pelo menos parcialmente o mecanismo de despacho, agendamento ou precificação/orçamentação (QQ3 $\ge 0{,}5$) para atingir 3,5 pontos (ou QQ3 = 1,0 quando se trata de sistema análogo de serviços de campo, onde QQ4 = 0,5).
+
+\begin{table}[htbp]
+\centering\small
+\caption{Questões de qualidade, opções de resposta e pontuação}\label{tab:qq}
+\begin{tabular}{p{9.0cm}p{4.2cm}}
+\toprule
+\textbf{Questão de qualidade} & \textbf{Opções de resposta}\\
+\midrule
+QQ1: A solução técnica é descrita de forma clara para plataformas de serviços ou assistência sob demanda? & Sim (1,0); Parcialmente (0,5); Não (0,0)\\
+QQ2: O documento de patente contribuiu para responder à questão de pesquisa principal? & Sim (1,0); Parcialmente (0,5); Não (0,0)\\
+QQ3: O método de despacho, roteirização, agendamento, intermediação ou precificação/orçamentação está claramente detalhado no resumo do documento? & Sim (1,0); Parcialmente (0,5); Não (0,0)\\
+QQ4: O documento trata de invenção aplicada diretamente a serviços automotivos (1,0) ou a serviços de campo análogos (0,5)? & Sim (1,0); Parcialmente (0,5); Não (0,0)\\
+\bottomrule
+\end{tabular}
+
+\smallskip
+\footnotesize Fonte: elaborado pelos autores.
+\end{table}
+
+\subsection{Coleta, consolidação, triagem e livro de códigos}
+
+A execução das \textit{strings} da Fase 2 recuperou 1.851 registros brutos: 789 no Espacenet (353 até 2019 e 436 de 2020 a 2026), 260 no Patentscope e 802 no INPI (28 por título e 774 por resumo).
+
+\paragraph{Consolidação por família.} Adotaram-se as \textbf{famílias de patentes} como unidades de análise internacional. No Espacenet, o agrupamento pelo identificador nativo de família reduziu as 789 linhas para 743 famílias únicas (46 constavam nos dois recortes temporais). Como a exportação do Patentscope não informa o identificador de família do Espacenet, realizou-se o pareamento pelo número de publicação normalizado: 45 dos 260 registros vincularam-se a famílias já presentes no Espacenet, e os 215 restantes foram agrupados por igualdade de título e depositante em 133 famílias novas, totalizando \textbf{876 famílias internacionais} (743 do Espacenet e 133 exclusivas do Patentscope). No INPI, a remoção dos 17 pedidos presentes simultaneamente nas buscas por título e por resumo resultou em \textbf{785 pedidos nacionais únicos}, perfazendo 1.661 unidades únicas.
+
+\paragraph{Obtenção dos resumos.} A exportação tabular do Espacenet não inclui o campo de resumo, e a listagem do INPI fornece apenas número do pedido, data, título e código IPC. Os resumos de 174 famílias internacionais já constavam da exportação do Patentscope; para as outras 702 famílias, executou-se consulta automatizada por número de publicação na base pública \textit{Google Patents Public Data} (GOOGLE, 2026), recuperando 697 resumos (totalizando 871 de 876 famílias com resumo em inglês; 5 famílias antigas permaneceram sem resumo digitalizado). Para os pedidos candidatos do INPI, o resumo e o nome do depositante foram consultados diretamente no portal pePI.
+
+\paragraph{Pré-triagem assistida e seleção manual.} Para organizar a triagem das 876 famílias internacionais e dos 785 pedidos do INPI, aplicou-se inicialmente um filtro em Python baseado em regras léxicas sobre título, resumo e códigos CPC/IPC (detalhadas no repositório suplementar), que classificou as famílias internacionais em: (i) 168 candidatas do domínio automotivo; (ii) 80 para revisão manual (serviços de campo e casos limítrofes); e (iii) 628 excluídas automaticamente por desvio manifesto de tema (recarga de veículos elétricos em \texttt{G06Q 50/06}, comunicação veículo-infraestrutura, revenda de carros usados e controle semafórico). No INPI, o filtro destacou 16 pedidos únicos prioritários (17 linhas, pois \texttt{PI 0703612-4} e \texttt{C1 0703612-4} referem-se ao mesmo pedido com certificado de adição) e sinalizou 769 exclusões automáticas (dispositivos mecânicos de engate de reboque em \texttt{B60D} e guinchos físicos em \texttt{B66D}). Uma amostra aleatória de 10\% das exclusões automáticas internacionais (63 de 628 famílias) foi inspecionada manualmente, não sendo encontrados falsos negativos para plataformas de serviços automotivos.
+
+Em seguida, as 248 famílias internacionais não excluídas ($168 + 80$) e os 16 pedidos únicos do INPI foram lidos e avaliados por título e resumo pelo primeiro autor sob supervisão e revisão metodológica da coautora. Nessa etapa manual de elegibilidade (CI01 e CE01 a CE05), foram descartadas entre as 248 famílias internacionais: (a) 70 publicações secundárias ou pedidos de continuação pertencentes a famílias já contabilizadas (CE04, incluindo 31 continuações da empresa \textit{X One, Inc.} com o mesmo resumo e desmembramentos entre PCT, Estados Unidos e Canadá das titulares \textit{Allstate}, \textit{Esurance}, \textit{State Farm}, \textit{Toyota} e \textit{Goodyear}, cujos países de publicação foram consolidados na família principal); (b) 2 famílias sem resumo disponível (CE05: \texttt{F0864} e \texttt{F0874}); e (c) 80 famílias fora do escopo computacional ou temático (CE02 e CE03, como manutenção de aeronaves, máquinas agrícolas, redes 6G e transporte coletivo por ônibus). Restaram \textbf{$N = 96$ famílias internacionais} após CI e CE (83 oriundas do Espacenet e 13 das famílias novas do Patentscope). No INPI, \textbf{$n = 2$ pedidos} (\texttt{BR 10 2016 024248 7} e \texttt{BR 11 2021 004268 7}) atenderam ao CI01, enquanto os outros 14 pedidos pré-triados foram excluídos por CE02 e CE03.
+
+\paragraph{Avaliação de qualidade e livro de códigos da QPS6.} Sobre os 98 documentos elegíveis ($96 + 2$), aplicaram-se as questões QQ1 a QQ4 (Quadro~\ref{tab:qq}). Das 96 famílias internacionais, 21 obtiveram nota entre $2{,}5$ e $3{,}0$ (abaixo do corte de $3{,}5$, por não detalharem no resumo o mecanismo de despacho, agendamento ou cálculo de custos em QQ3, como \texttt{F0210}, que trata de auxílio entre veículos autônomos e obteve $2{,}5$) e foram excluídas, resultando em \textbf{$M = 75$ famílias internacionais aprovadas} (64 do Espacenet e 11 do Patentscope). Dos 2 pedidos do INPI, \texttt{BR 11 2021 004268 7} obteve $2{,}5$ pontos e \textbf{\texttt{BR 10 2016 024248 7}} atingiu \textbf{$3{,}5$ pontos} ($\text{QQ1}=1{,}0$; $\text{QQ2}=1{,}0$; $\text{QQ3}=0{,}5$; $\text{QQ4}=1{,}0$), resultando em \textbf{$m = 1$ pedido nacional aprovado} (\texttt{PAT76}). Entre os 76 documentos aprovados (\texttt{PAT01} a \texttt{PAT76}), 40 (52,6\%) obtiveram nota máxima $4{,}0$ e 36 (47,4\%) obtiveram nota $3{,}5$. O Quadro~\ref{tab:selecao} detalha o funil de seleção por base.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Detalhamento do processo de seleção dos documentos de patentes por base}\label{tab:selecao}
+\begin{tabular}{>{\raggedright\arraybackslash}p{4.2cm} >{\centering\arraybackslash}p{2.0cm} >{\centering\arraybackslash}p{2.5cm} >{\centering\arraybackslash}p{2.0cm} >{\centering\arraybackslash}p{2.0cm}}
+\toprule
+\shortstack[l]{\textbf{Base consultada}} & \shortstack{\textbf{Registros}\\\textbf{brutos}} & \shortstack{\textbf{Famílias/}\\\textbf{pedidos únicos}} & \shortstack{\textbf{Após}\\\textbf{CI e CE}} & \shortstack{\textbf{Após QQ}\\\textbf{($\ge 3{,}5$)}}\\
+\midrule
+Espacenet (EPO) & 789 & 743 & 83 & 64\\
+Patentscope (OMPI -- famílias novas) & 260 & 133 & 13 & 11\\
+INPI (Brasil -- Título e Resumo) & 802 & 785 & 2 & 1\\
+\midrule
+\textbf{Total Consolidado} & \textbf{1.851} & \textbf{1.661} & \textbf{98} & \textbf{76}\\
+\bottomrule
+\end{tabular}
+
+\smallskip
+\footnotesize Fonte: elaborado pelos autores. As 876 famílias únicas internacionais somam as 743 do Espacenet (das quais 43 também constavam no Patentscope) e as 133 exclusivas do Patentscope. As planilhas auditáveis acompanham o pacote suplementar deste estudo. Endereço do repositório do projeto: \url{https://github.com/darderian/MCT-Docs}.
+\end{table}
+
+Para responder à QPS6 de forma reprodutível, definiu-se um livro de códigos que classifica cada uma das 76 patentes aprovadas em uma única categoria funcional predominante (mutuamente exclusiva), segundo o objeto principal do resumo:
+\begin{itemize}
+    \item \textbf{Categoria C1 -- Despacho geolocalizado e alocação de socorro rodoviário e reboque:} documentos cujo foco principal é o acionamento emergencial de assistência na estrada (\textit{roadside assistance}) ou guinchos (\textit{tow trucks}) a partir da localização do veículo avariado;
+    \item \textbf{Categoria C2 -- Plataformas de intermediação, localização e agendamento de oficinas e manutenção:} documentos voltados à busca geolocalizada de estabelecimentos de reparo/autopeças, agendamento de revisões e mediação digital entre proprietários de veículos e oficinas ou mecânicos;
+    \item \textbf{Categoria C3 -- Orçamentação automatizada e estimativa de custos de reparo veicular:} documentos cujo núcleo técnico é o cálculo prévio, a cotação comparativa ou a estimativa automatizada de custos de peças e mão de obra em reparos automotivos; e
+    \item \textbf{Categoria C4 -- Despacho, escalonamento de equipes móveis e precificação dinâmica em FSM análogo:} documentos de gerenciamento de serviços de campo (\textit{field service}) ou plataformas sob demanda não restritas a oficinas/reboque que detalham algoritmos de alocação em lotes, roteirização de técnicos ou determinação dinâmica de preços.
+\end{itemize}
+
+\paragraph{Extração de variáveis e reprodutibilidade.} Adotou-se o ano da prioridade mais antiga como referência temporal na QPS1. O país de origem do depositante (QPS3) foi extraído do código ISO entre colchetes fornecido pelo Espacenet em 462 das 876 famílias internacionais (52,7\% do total bruto, e 49 das 76 aprovadas); em 405 famílias brutas (46,2\%, e 26 das 76 aprovadas), por ausência desse metadado na exportação, o país foi inferido pelo escritório do depósito prioritário; em 9 famílias brutas excluídas (1,0\%) não havia dado disponível; e em 1 pedido aprovado (\texttt{PAT76}) a origem nacional foi extraída do INPI. O processamento foi realizado em Python (\texttt{pandas}, \texttt{openpyxl} e \texttt{google-cloud-bigquery}), e as planilhas e os \textit{scripts} correspondentes integram o pacote suplementar do estudo. O repositório do projeto está em: \url{https://github.com/darderian/MCT-Docs}.
+
+\section{Análise dos Resultados}
+
+As informações completas e as pontuações individuais dos 76 documentos aprovados (\texttt{PAT01} a \texttt{PAT76}) estão registradas na planilha \texttt{patentes\_aprovadas\_76.csv}, incluída no pacote suplementar do estudo; o repositório do projeto está em \url{https://github.com/darderian/MCT-Docs}.
+
+\subsection{Questões de pesquisa secundárias -- estatísticas (QPS1 a QPS5)}
+
+\paragraph{QPS1: Qual o ano do depósito/prioridade da patente?}
+As 76 famílias aprovadas possuem datas de prioridade distribuídas entre 2000 e 2026, conforme ilustrado no Gráfico~\ref{fig:ano} e detalhado no Quadro~\ref{tab:ano}. Agrupando-se a série histórica em quatro períodos consecutivos que totalizam as 76 famílias, observa-se: (i) de 2000 a 2009, 5 famílias (6,6\%); (ii) de 2010 a 2013, 8 famílias (10,5\%); (iii) de 2014 a 2020, 46 famílias (60,5\%), com o pico da série em 2020 (9 famílias; 11,8\%) e 7 famílias nos anos de 2014, 2016 e 2018 (9,2\% cada); e (iv) de 2021 a 2026, 17 famílias (22,4\%), com 5 depósitos em 2023 (6,6\%) e 3 depósitos em 2022, 2024 e 2025 (3,9\% cada). Considerando o recorte de onze anos entre 2014 e 2024, concentram-se 59 das 76 famílias aprovadas (77,6\%). Os anos de 2025 e 2026 apresentam contagem reduzida em parte pelo período legal de sigilo de dezoito meses contados do depósito ou da prioridade (BRASIL, 1996).
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[xscale=0.55, yscale=0.42]
+  \foreach \y in {0,2,4,6,8,10} {
+    \draw[gray!25, dashed] (0.3,\y) -- (22.7,\y);
+    \node[left, font=\scriptsize, text=black!80] at (0.3,\y) {\y};
+  }
+  \draw[black!60] (0.3,0) -- (22.7,0);
+  \draw[black!60] (0.3,0) -- (0.3,10.3);
+  \node[rotate=90, font=\footnotesize, text=black!80] at (-1.0,5) {Famílias de patentes};
+  \node[font=\footnotesize, text=black!80] at (11.5,-2.1) {Ano de prioridade};
+  \node[font=\footnotesize\bfseries, text=black!85] at (11.5,11.1) {Famílias de patentes aprovadas por ano do primeiro depósito (prioridade)};
+
+  \foreach \i/\yr/\val in {
+    1/2000/1, 2/2002/1, 3/2004/1, 4/2008/1, 5/2009/1,
+    6/2010/2, 7/2011/1, 8/2012/2, 9/2013/3, 10/2014/7,
+    11/2015/6, 12/2016/7, 13/2017/6, 14/2018/7, 15/2019/4,
+    16/2020/9, 17/2021/2, 18/2022/3, 19/2023/5, 20/2024/3,
+    21/2025/3, 22/2026/1
+  } {
+    \fill[blue!60!cyan!75!black] (\i-0.31, 0) rectangle (\i+0.31, \val);
+    \node[above, font=\scriptsize, text=black!90] at (\i, \val) {\val};
+    \node[below left, rotate=55, font=\tiny, text=black!85, inner sep=1pt] at (\i+0.15, -0.1) {\yr};
+  }
+\end{tikzpicture}
+\caption{Famílias de patentes aprovadas por ano de prioridade ($N = 76$). Fonte: elaborado pelos autores a partir dos dados do Espacenet, Patentscope e INPI.}\label{fig:ano}
+\end{figure}
+
+\begin{table}[htbp]
+\centering\small
+\caption{Distribuição das 76 famílias aprovadas por ano de prioridade (QPS1)}\label{tab:ano}
+\begin{tabular}{>{\centering\arraybackslash}p{1.0cm}>{\centering\arraybackslash}p{1.7cm}>{\centering\arraybackslash}p{1.6cm}p{8.3cm}}
+\toprule
+\textbf{Ano} & \textbf{Famílias ($n$)} & \textbf{Perc. (\%)} & \textbf{Identificadores (\texttt{PATxx})}\\
+\midrule
+2000 & 1 & 1,3\% & PAT75\\
+2002 & 1 & 1,3\% & PAT74\\
+2004 & 1 & 1,3\% & PAT73\\
+2008 & 1 & 1,3\% & PAT72\\
+2009 & 1 & 1,3\% & PAT01\\
+2010 & 2 & 2,6\% & PAT69, PAT70\\
+2011 & 1 & 1,3\% & PAT68\\
+2012 & 2 & 2,6\% & PAT02, PAT67\\
+2013 & 3 & 3,9\% & PAT03, PAT64, PAT65\\
+2014 & 7 & 9,2\% & PAT04, PAT05, PAT58, PAT59, PAT60, PAT61, PAT62\\
+2015 & 6 & 7,9\% & PAT52, PAT53, PAT54, PAT55, PAT56, PAT57\\
+2016 & 7 & 9,2\% & PAT46, PAT47, PAT48, PAT49, PAT50, PAT51, PAT76\\
+2017 & 6 & 7,9\% & PAT06, PAT07, PAT42, PAT43, PAT44, PAT45\\
+2018 & 7 & 9,2\% & PAT34, PAT35, PAT36, PAT37, PAT38, PAT39, PAT41\\
+2019 & 4 & 5,3\% & PAT30, PAT31, PAT32, PAT33\\
+2020 & 9 & 11,8\% & PAT22, PAT23, PAT24, PAT25, PAT26, PAT27, PAT28, PAT29, PAT40\\
+2021 & 2 & 2,6\% & PAT20, PAT21\\
+2022 & 3 & 3,9\% & PAT17, PAT18, PAT19\\
+2023 & 5 & 6,6\% & PAT12, PAT13, PAT14, PAT15, PAT16\\
+2024 & 3 & 3,9\% & PAT08, PAT09, PAT10\\
+2025 & 3 & 3,9\% & PAT11, PAT63, PAT66\\
+2026 & 1 & 1,3\% & PAT71\\
+\midrule
+\textbf{Total} & \textbf{76} & \textbf{100,0\%} & \texttt{PAT01} a \texttt{PAT76}\\
+\bottomrule
+\end{tabular}
+
+\smallskip
+\footnotesize Fonte: elaborado pelos autores.
+\end{table}
+
+\paragraph{QPS2: Qual o país em que a patente foi depositada?}
+Uma mesma família de patentes pode englobar depósitos em mais de um país ou escritório regional, motivo pelo qual a soma das frequências no Quadro~\ref{tab:pais_dep} ultrapassa 76. Os Estados Unidos (US) lideram como escritório receptor, com depósitos em 41 das 76 famílias aprovadas (53,9\%), seguidos pela China (CN, 18 famílias; 23,7\%), Coreia do Sul (KR, 13 famílias; 17,1\%) e Canadá (CA, 12 famílias; 15,8\%). O procedimento internacional via PCT (WO) foi empregado em 10 famílias (13,2\%), enquanto Austrália (AU) registrou 3 famílias (3,9\%), Escritório Europeu (EP) e Japão (JP) contabilizaram 2 famílias cada (2,6\%), e Brasil (BR), Alemanha (DE), Índia (IN), Malásia (MY), Singapura (SG) e Taiwan (TW) apresentaram 1 família cada (1,3\%). No Brasil, dos 785 pedidos únicos identificados na busca bruta do INPI, apenas o pedido nacional \texttt{PAT76} (\texttt{BR 10 2016 024248 7}) compõe o corpus aprovado, e nenhuma das 75 famílias internacionais aprovadas apresentou membro de família depositado no escritório brasileiro (BR) segundo os registros do Espacenet e do Patentscope.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Famílias de patentes aprovadas por país ou escritório de depósito (QPS2)}\label{tab:pais_dep}
+\begin{tabular}{p{3.4cm}ccp{6.8cm}}
+\toprule
+\textbf{País / Escritório} & \textbf{Famílias} & \textbf{\% (n=76)} & \textbf{Identificadores (\texttt{PATxx})}\\
+\midrule
+Estados Unidos (US) & 41 & 53,9\% & PAT01, PAT02, PAT06, PAT13, PAT16, PAT17, PAT18, PAT24, PAT25, PAT26, PAT29, PAT30, PAT31, PAT32, PAT35, PAT36, PAT37, PAT38, PAT39, PAT45, PAT46, PAT48, PAT49, PAT50, PAT51, PAT55, PAT56, PAT57, PAT59, PAT61, PAT62, PAT64, PAT65, PAT67, PAT68, PAT69, PAT70, PAT71, PAT72, PAT74, PAT75\\
+China (CN) & 18 & 23,7\% & PAT05, PAT07, PAT08, PAT09, PAT10, PAT11, PAT12, PAT20, PAT22, PAT23, PAT39, PAT42, PAT45, PAT58, PAT63, PAT66, PAT68, PAT73\\
+Coreia do Sul (KR) & 13 & 17,1\% & PAT04, PAT14, PAT19, PAT27, PAT28, PAT33, PAT40, PAT43, PAT47, PAT53, PAT54, PAT60, PAT68\\
+Canadá (CA) & 12 & 15,8\% & PAT01, PAT06, PAT29, PAT31, PAT35, PAT36, PAT37, PAT38, PAT51, PAT62, PAT65, PAT68\\
+PCT (WO) & 10 & 13,2\% & PAT01, PAT29, PAT35, PAT36, PAT37, PAT38, PAT44, PAT62, PAT65, PAT69\\
+Austrália (AU) & 3 & 3,9\% & PAT34, PAT52, PAT68\\
+Escritório Europeu (EP) & 2 & 2,6\% & PAT25, PAT68\\
+Japão (JP) & 2 & 2,6\% & PAT21, PAT25\\
+Brasil (BR -- INPI) & 1 & 1,3\% & PAT76 (\texttt{BR 10 2016 024248 7})\\
+Alemanha (DE) & 1 & 1,3\% & PAT25\\
+Índia (IN) & 1 & 1,3\% & PAT15\\
+Malásia (MY) & 1 & 1,3\% & PAT41\\
+Singapura (SG) & 1 & 1,3\% & PAT44\\
+Taiwan (TW) & 1 & 1,3\% & PAT03\\
+\bottomrule
+\end{tabular}
+
+\smallskip
+\footnotesize Fonte: elaborado pelos autores. A soma ultrapassa 76 porque uma mesma família pode conter depósitos em mais de um país ou escritório.
+\end{table}
+
+\paragraph{QPS3: Qual o país de origem do depositante da patente?}
+Na distribuição por país de origem do depositante (Quadro~\ref{tab:pais_orig}), os Estados Unidos lideram com 37 das 76 famílias aprovadas (48,7\%), seguidos pela China com 17 famílias (22,4\%) e pela Coreia do Sul com 12 famílias (15,8\%). A comparação entre os Quadros~\ref{tab:pais_dep} e~\ref{tab:pais_orig} evidencia estratégias distintas de internacionalização: titulares norte-americanos estendem regularmente a proteção ao Canadá (11 famílias) e ao sistema PCT (8 famílias), enquanto titulares chineses e sul-coreanos depositam predominantemente em seus escritórios domésticos (apenas duas famílias chinesas da empresa \textit{Didi}, \texttt{PAT39} e \texttt{PAT45}, estenderam proteção aos Estados Unidos). Os demais países de origem são Austrália (2 famílias; 2,6\%) e Alemanha, Brasil, Canadá, Índia, Japão, Malásia, Singapura e Taiwan, com 1 família cada (1,3\%), totalizando exatamente as 76 famílias (100,0\%).
+
+\begin{table}[htbp]
+\centering\small
+\caption{Famílias de patentes aprovadas por país de origem do depositante (QPS3)}\label{tab:pais_orig}
+\begin{tabular}{p{3.4cm}ccp{6.8cm}}
+\toprule
+\textbf{País de origem} & \textbf{Famílias} & \textbf{Perc. (\%)} & \textbf{Identificadores (\texttt{PATxx})}\\
+\midrule
+Estados Unidos (US) & 37 & 48,7\% & PAT01, PAT02, PAT06, PAT13, PAT16, PAT17, PAT18, PAT24, PAT26, PAT30, PAT31, PAT32, PAT35, PAT36, PAT37, PAT38, PAT46, PAT48, PAT49, PAT50, PAT51, PAT55, PAT56, PAT57, PAT59, PAT61, PAT62, PAT64, PAT65, PAT67, PAT68, PAT69, PAT70, PAT71, PAT72, PAT74, PAT75\\
+China (CN) & 17 & 22,4\% & PAT05, PAT07, PAT08, PAT09, PAT10, PAT11, PAT12, PAT20, PAT22, PAT23, PAT39, PAT42, PAT45, PAT58, PAT63, PAT66, PAT73\\
+Coreia do Sul (KR) & 12 & 15,8\% & PAT04, PAT14, PAT19, PAT27, PAT28, PAT33, PAT40, PAT43, PAT47, PAT53, PAT54, PAT60\\
+Austrália (AU) & 2 & 2,6\% & PAT34, PAT52\\
+Alemanha (DE) & 1 & 1,3\% & PAT25\\
+Brasil (BR) & 1 & 1,3\% & PAT76\\
+Canadá (CA) & 1 & 1,3\% & PAT29\\
+Índia (IN) & 1 & 1,3\% & PAT15\\
+Japão (JP) & 1 & 1,3\% & PAT21\\
+Malásia (MY) & 1 & 1,3\% & PAT41\\
+Singapura (SG) & 1 & 1,3\% & PAT44\\
+Taiwan (TW) & 1 & 1,3\% & PAT03\\
+\midrule
+\textbf{Total} & \textbf{76} & \textbf{100,0\%} & \texttt{PAT01} a \texttt{PAT76}\\
+\bottomrule
+\end{tabular}
+
+\smallskip
+\footnotesize Fonte: elaborado pelos autores. Em 49 famílias a origem veio do código ISO entre colchetes do Espacenet, em 26 foi inferida pelo escritório prioritário e em 1 (\texttt{PAT76}) proveio do INPI.
+\end{table}
+
+\paragraph{QPS4: A patente foi depositada por empresa, pessoa física ou instituição de ensino e pesquisa?}
+Conforme ilustrado no Gráfico~\ref{fig:natureza} e detalhado no Quadro~\ref{tab:natureza}, a auditoria da coluna de depositantes nas bases originais indica que 44 famílias foram depositadas exclusivamente por empresas (57,9\%), 22 por pessoas físicas (inventores individuais isolados; 28,9\%, incluindo o pedido brasileiro \texttt{PAT76}), 6 por empresas em cotitularidade com inventores (7,9\%) e 4 por instituições de ensino e pesquisa (universidades e institutos tecnológicos em Taiwan, China e Índia; 5,3\%). Somando-se os depósitos exclusivos de empresas (44) aos em cotitularidade (6), constata-se participação empresarial em 50 das 76 famílias aprovadas (65,8\%).
+
+\sloppy
+Agrupando-se as 50 famílias com participação empresarial por setor econômico, identificam-se: (i) \textbf{seguradoras automotivas (14 famílias; 18,4\% do total de 76)}, sendo 10 da \textit{Allstate Insurance Company} (\texttt{PAT06}, \texttt{PAT31}, \texttt{PAT35}, \texttt{PAT36}, \texttt{PAT37}, \texttt{PAT38}, \texttt{PAT57}, \texttt{PAT59}, \texttt{PAT61} e \texttt{PAT62}), mais uma da subsidiária \textit{Esurance} (\texttt{PAT01}), uma da \textit{State Farm} (\texttt{PAT56}), uma da \textit{GEICO} (\texttt{PAT71}) e uma da \textit{Samsung Fire \& Marine Insurance} (\texttt{PAT14}); (ii) \textbf{montadoras e fabricantes automotivos (5 famílias; 6,6\%)}, compreendendo \textit{Ford} (\texttt{PAT02} e \texttt{PAT74}), \textit{Toyota} (\texttt{PAT65}), \textit{Daihatsu} (\texttt{PAT21}) e \textit{Goodyear} (\texttt{PAT68}); e (iii) \textbf{empresas de tecnologia da informação, mobilidade e serviços automotivos (31 famílias; 40,8\%)}, incluindo \textit{IBM} (\texttt{PAT46}, \texttt{PAT50} e \texttt{PAT75}), \textit{Beijing Didi Infinity} (\texttt{PAT39} e \texttt{PAT45}), \textit{GM Cruise Holdings} (\texttt{PAT18}), \textit{IAA Inc.} (\texttt{PAT24}), \textit{Nextev USA} (\texttt{PAT48}), \textit{My Car Fix} (\texttt{PAT49}), \textit{GrabTaxi Holdings} (\texttt{PAT44}), \textit{RapidSOS} (\texttt{PAT32}), \textit{Mitchell International} (\texttt{PAT26}), \textit{Shenzhen Launch Tech} (\texttt{PAT11}) e \textit{Sino Assistance} (\texttt{PAT05}).
+\fussy
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[xscale=0.125, yscale=0.82]
+  \foreach \x in {0,10,20,30,40,50} {
+    \draw[gray!25, dashed] (\x,0.3) -- (\x,4.6);
+    \node[below, font=\scriptsize, text=black!80] at (\x,0.3) {\x};
+  }
+  \draw[black!60] (0,0.3) -- (53,0.3);
+  \draw[black!60] (0,0.3) -- (0,4.6);
+  \node[font=\footnotesize, text=black!80] at (26.5,-0.5) {Famílias de patentes};
+  \node[font=\footnotesize\bfseries, text=black!85] at (18,5.0) {Famílias de patentes aprovadas por natureza do depositante};
+
+  \fill[blue!60!cyan!75!black] (0, 3.75) rectangle (44, 4.25);
+  \node[left, font=\footnotesize, text=black!85] at (-0.5, 4.0) {Empresas (isoladas)};
+  \node[right, font=\scriptsize, text=black!90] at (44.5, 4.0) {44 (57,9\%)};
+
+  \fill[blue!60!cyan!75!black] (0, 2.75) rectangle (22, 3.25);
+  \node[left, font=\footnotesize, text=black!85] at (-0.5, 3.0) {Inventores Individuais (PF)};
+  \node[right, font=\scriptsize, text=black!90] at (22.5, 3.0) {22 (28,9\%)};
+
+  \fill[blue!60!cyan!75!black] (0, 1.75) rectangle (6, 2.25);
+  \node[left, font=\footnotesize, text=black!85] at (-0.5, 2.0) {Empresas + Inventores};
+  \node[right, font=\scriptsize, text=black!90] at (6.5, 2.0) {6 (7,9\%)};
+
+  \fill[blue!60!cyan!75!black] (0, 0.75) rectangle (4, 1.25);
+  \node[left, font=\footnotesize, text=black!85] at (-0.5, 1.0) {Inst. de Ensino/Pesquisa};
+  \node[right, font=\scriptsize, text=black!90] at (4.5, 1.0) {4 (5,3\%)};
+\end{tikzpicture}
+\caption{Famílias de patentes aprovadas por natureza do depositante ($N = 76$). Fonte: elaborado pelos autores a partir dos dados do Espacenet, Patentscope e INPI.}\label{fig:natureza}
+\end{figure}
+
+\begin{table}[htbp]
+\centering\small
+\caption{Natureza jurídica dos depositantes nas 76 famílias aprovadas (QPS4)}\label{tab:natureza}
+\begin{tabular}{p{4.3cm}ccp{5.9cm}}
+\toprule
+\textbf{Natureza do depositante} & \textbf{Famílias} & \textbf{Perc. (\%)} & \textbf{Identificadores (\texttt{PATxx})}\\
+\midrule
+Empresa (exclusivamente pessoa jurídica) & 44 & 57,9\% & PAT06--PAT08, PAT10--PAT12, PAT14, PAT18, PAT20, PAT21, PAT24, PAT26, PAT27, PAT29, PAT31--PAT33, PAT35--PAT39, PAT42, PAT44--PAT46, PAT48--PAT50, PAT53, PAT56--PAT63, PAT65, PAT66, PAT71, PAT73--PAT75\\
+Pessoa Física (inventor individual isolado) & 22 & 28,9\% & PAT04, PAT13, PAT16, PAT17, PAT19, PAT23, PAT25, PAT28, PAT30, PAT34, PAT40, PAT41, PAT43, PAT47, PAT51, PAT52, PAT54, PAT55, PAT64, PAT67, PAT72, PAT76\\
+Empresa em conjunto com Inventores (PF) & 6 & 7,9\% & PAT01, PAT02, PAT05, PAT68, PAT69, PAT70\\
+Instituição de Ensino e Pesquisa & 4 & 5,3\% & PAT03, PAT09, PAT15, PAT22\\
+\midrule
+\textbf{Total} & \textbf{76} & \textbf{100,0\%} & \texttt{PAT01} a \texttt{PAT76}\\
+\bottomrule
+\end{tabular}
+
+\smallskip
+\footnotesize Fonte: elaborado pelos autores.
+\end{table}
+
+\paragraph{QPS5: Quais foram as CIP utilizadas para o depósito da patente?}
+A contagem exata das subclasses CIP e CPC atribuídas às 76 famílias aprovadas (Quadro~\ref{tab:cipfreq}) mostra que a subclasse \textbf{\texttt{G06Q}} (\textit{sistemas ou métodos de processamento de dados para fins administrativos, comerciais, financeiros ou gerenciais}) está presente em 68 das 76 famílias (89,5\%), seguida por \textbf{\texttt{H04W}} (\textit{redes de comunicação sem fio e serviços móveis baseados em localização}), em 21 famílias (27,6\%), \textbf{\texttt{G06F}} (\textit{processamento elétrico de dados digitais}), em 16 famílias (21,1\%), \textbf{\texttt{G07C}/\texttt{B60R}} (\textit{registro de dados diagnósticos e equipamentos veiculares}), em 15 famílias (19,7\%), e \textbf{\texttt{G08G}} (\textit{sistemas de controle de tráfego}), em 14 famílias (18,4\%). No nível de grupo e subgrupo, os códigos de maior incidência na planilha são: \texttt{G06Q 30/02} e \texttt{G06Q 30/0283} (cotações, comércio eletrônico e determinação de preços, em 22 famílias; 28,9\%), \texttt{G06Q 10/20} (administração de reparo ou manutenção de veículos, em 21 famílias; 27,6\%), \texttt{G06Q 10/06} e \texttt{G06Q 10/0631} (escalonamento e alocação de recursos e equipes, em 19 famílias; 25,0\%), \texttt{G06Q 50/30} e \texttt{G06Q 50/40} (serviços de transporte, em 18 famílias; 23,7\%), \texttt{G06Q 10/00} (administração geral, em 17 famílias; 22,4\%), \texttt{H04W 4/02} (serviços baseados em localização geográfica, em 16 famílias; 21,1\%, incluindo \texttt{PAT76}), \texttt{G06Q 40/08} (seguros veiculares, em 9 famílias; 11,8\%), o subgrupo CPC \texttt{G08G 1/202} (sistemas de despacho e assistência rodoviária, em 7 famílias; 9,2\%) e o subgrupo CIP \texttt{G08G 1/123} / \texttt{1/127} (indicação da posição de veículos, em 5 famílias; 6,6\%).
+
+\begin{table}[htbp]
+\centering\small
+\caption{Subclasses da CIP/CPC de maior ocorrência nas 76 famílias aprovadas (QPS5)}\label{tab:cipfreq}
+\begin{tabular}{p{2.2cm}ccp{7.8cm}}
+\toprule
+\textbf{Subclasse} & \textbf{Famílias} & \textbf{\% (n=76)} & \textbf{Principais grupos/subgrupos e identificadores representativos}\\
+\midrule
+\texttt{G06Q} & 68 & 89,5\% & \texttt{30/02} (22), \texttt{10/20} (21), \texttt{10/06} (19), \texttt{50/30} (18), \texttt{40/08} (9) -- PAT01, PAT03--PAT04, PAT06--PAT29, PAT31, PAT33--PAT36, PAT38--PAT59, PAT61--PAT72, PAT74--PAT75\\
+\texttt{H04W} & 21 & 27,6\% & \texttt{4/02} (16), \texttt{4/029}, \texttt{4/90} -- PAT01, PAT02, PAT06, PAT23, PAT25, PAT29, PAT31, PAT32, PAT35--PAT37, PAT48, PAT51, PAT56, PAT59, PAT61, PAT62, PAT68, PAT71, PAT73, PAT76\\
+\texttt{G06F} & 16 & 21,1\% & \texttt{16/29} (GIS/mapas), \texttt{16/95}, \texttt{3/048} -- PAT01, PAT06, PAT10, PAT12, PAT14, PAT23, PAT37, PAT45, PAT48, PAT56, PAT59, PAT60, PAT63, PAT69, PAT74, PAT75\\
+\texttt{G07C} / \texttt{B60R} & 15 & 19,7\% & \texttt{G07C 5/00} (11), \texttt{5/08} (telemetria OBD) -- PAT02, PAT15, PAT18, PAT32, PAT35, PAT36, PAT38, PAT46, PAT48, PAT51, PAT55, PAT59, PAT61, PAT62, PAT75\\
+\texttt{G08G} & 14 & 18,4\% & \texttt{1/202} [CPC] (7), \texttt{1/00} (6), \texttt{1/123} [CIP] (3) -- PAT01, PAT03, PAT06, PAT24, PAT25, PAT30, PAT32, PAT35, PAT36, PAT39, PAT44, PAT48, PAT72, PAT75\\
+\texttt{H04L} / \texttt{H04M} & 10 & 13,2\% & \texttt{H04L 67/52} (8), \texttt{H04M 3/51} (URA/atendimento) -- PAT01, PAT02, PAT07, PAT25, PAT36, PAT48, PAT56, PAT59, PAT61, PAT73\\
+\texttt{G01C} & 9 & 11,8\% & \texttt{21/34} (cálculo de rotas/navegação GPS) -- PAT01, PAT24, PAT25, PAT30, PAT32, PAT39, PAT46, PAT48, PAT72\\
+\texttt{G06N} / \texttt{G06T} & 5 & 6,6\% & \texttt{G06N 20/00} (aprendizado de máquina), \texttt{G06T 7/00} (visão computacional) -- PAT06, PAT25, PAT35, PAT53, PAT63\\
+\bottomrule
+\end{tabular}
+
+\smallskip
+\footnotesize Fonte: elaborado pelos autores a partir da planilha \texttt{patentes\_aprovadas\_76.csv}. As categorias não são mutuamente exclusivas, pois uma família pode receber mais de uma subclasse.
+\end{table}
+
+\subsection{Questão de pesquisa secundária -- técnica (QPS6)}
+
+\paragraph{QPS6: Quais soluções técnicas de despacho, agendamento, orçamentação e precificação são descritas nos documentos?}
+Aplicando-se o livro de códigos definido na Seção 3.5 sobre as 76 patentes aprovadas, 63 famílias (82,9\%) inserem-se diretamente no domínio automotivo (Categorias C1, C2 e C3) e 13 famílias (17,1\%) correspondem a sistemas análogos de gerenciamento de serviços de campo e despacho sob demanda (Categoria C4), conforme sintetizado no Quadro~\ref{tab:qps6_cat}.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Distribuição das 76 patentes aprovadas por categoria funcional do livro de códigos (QPS6)}\label{tab:qps6_cat}
+\begin{tabular}{p{3.8cm}ccp{6.4cm}}
+\toprule
+\textbf{Categoria Funcional} & \textbf{Famílias} & \textbf{Perc. (\%)} & \textbf{Identificadores (\texttt{PATxx})}\\
+\midrule
+\textbf{C1.} Despacho geolocalizado e alocação de socorro rodoviário e reboque & 28 & 36,8\% & PAT01--PAT06, PAT16, PAT17, PAT24, PAT29--PAT32, PAT35--PAT38, PAT41, PAT42, PAT46, PAT52, PAT54, PAT56, PAT59, PAT61, PAT62, PAT68, PAT71\\
+\textbf{C2.} Plataformas de intermediação, localização e agendamento de oficinas e manutenção & 18 & 23,7\% & PAT07, PAT08, PAT10, PAT12, PAT13, PAT18, PAT19, PAT21, PAT22, PAT27, PAT28, PAT34, PAT40, PAT43, PAT51, PAT58, PAT63, PAT76\\
+\textbf{C3.} Orçamentação automatizada e estimativa de custos de reparo por imagem/IA & 17 & 22,4\% & PAT11, PAT14, PAT15, PAT26, PAT33, PAT47--PAT49, PAT53, PAT55, PAT57, PAT60, PAT65, PAT67, PAT69, PAT74, PAT75\\
+\textbf{C4.} Despacho em lotes, escalonamento de equipes e precificação dinâmica em FSM análogo & 13 & 17,1\% & PAT09, PAT20, PAT23, PAT25, PAT39, PAT44, PAT45, PAT50, PAT64, PAT66, PAT70, PAT72, PAT73\\
+\midrule
+\textbf{Total Consolidado} & \textbf{76} & \textbf{100,0\%} & \texttt{PAT01} a \texttt{PAT76}\\
+\bottomrule
+\end{tabular}
+
+\smallskip
+\footnotesize Fonte: elaborado pelos autores com base na leitura dos títulos e resumos das 76 patentes aprovadas.
+\end{table}
+
+\paragraph{1. Categoria C1 -- Despacho geolocalizado e alocação de socorro rodoviário e reboque (28 famílias; 36,8\%):}
+Reúne os sistemas voltados ao atendimento emergencial de veículos avariados na via. \texttt{PAT01} (\textit{Esurance}, \texttt{F0747}) descreve o recebimento de requisição móvel de um veículo em pane, extração de coordenadas GPS e despacho automatizado com validação de apólice. \texttt{PAT02} (\textit{Ford}, \texttt{F0697}) e \texttt{PAT46} (\texttt{F0517}) acoplam o diagnóstico embarcado do veículo (OBD/telemetria) ao envio da ordem de socorro. \texttt{PAT03} (\textit{Taipei Chengshih Univ.}, \texttt{F0663}), \texttt{PAT04} (\texttt{F0616}), \texttt{PAT05} (\textit{Sino Assistance}, \texttt{F0611}) e \texttt{PAT68} (\textit{Goodyear}, \texttt{F0718}) implementam fluxos de acionamento e correspondência em tempo real entre o celular do motorista e centrais de resgate. Na carteira da \textit{Allstate}, \texttt{PAT06} (\texttt{F0506}) introduz o uso de imagens com marcação geográfica (\textit{geotagging}) para identificar a avaria antes do envio do guincho; \texttt{PAT31} (\texttt{F0355}) sincroniza o atendimento por voz (URA/IVR) com a interface gráfica do celular; \texttt{PAT35} (\texttt{F0418}) disponibiliza uma API de socorro rodoviário; \texttt{PAT37} (\texttt{F0429}) analisa vídeo em tempo real da pane; \texttt{PAT59} (\texttt{F0614}) aloca preventivamente veículos de resgate em estações-base; e \texttt{PAT61} (\texttt{F0628}) seleciona o prestador segundo o tempo estimado de chegada (ETA). Por sua vez, \texttt{PAT56} (\textit{State Farm}), \texttt{PAT32} (\textit{RapidSOS}), \texttt{PAT54} (\texttt{F0583}) e \texttt{PAT71} (\textit{GEICO}, \texttt{F0014}) detalham o rastreamento contínuo de guinchos por pontos GPS (\textit{breadcrumbs}), enquanto \texttt{PAT52} (\texttt{F0566}) permite ao condutor escolher o guincho por proximidade e preço, e \texttt{PAT16} (\texttt{F0158}) e \texttt{PAT62} (\textit{Allstate}, \texttt{F0640}) propõem o atendimento de socorro rodoviário por \textit{crowdsourcing}.
+
+\paragraph{2. Categoria C2 -- Plataformas de intermediação, localização e agendamento de oficinas e manutenção (18 famílias; 23,7\%):}
+Compreende plataformas de conexão entre proprietários de veículos e oficinas mecânicas ou técnicos de reparo. \texttt{PAT34} (\texttt{F0384}, Austrália) descreve uma plataforma em nuvem com mapas GNSS/GPS e aplicativo móvel para localizar mecânicos licenciados próximos. \texttt{PAT51} (\texttt{F0561}), \texttt{PAT13} (\texttt{F0139}) e o pedido brasileiro \textbf{\texttt{PAT76}} (\texttt{BR 10 2016 024248 7}) tratam da localização geográfica e recomendação de oficinas de manutenção e lojas de autopeças a partir do dispositivo móvel do usuário. Já \texttt{PAT07} (\texttt{F0466}), \texttt{PAT18} (\textit{GM Cruise Holdings}, \texttt{F0199}), \texttt{PAT21} (\textit{Daihatsu}, \texttt{F0274}), \texttt{PAT27} (\texttt{F0312}), \texttt{PAT28} (\texttt{F0328}), \texttt{PAT40} (\texttt{F0331}), \texttt{PAT43} (\texttt{F0473}) e \texttt{PAT58} (\texttt{F0608}) estruturam sistemas de agendamento e intermediação remota (\textit{non-face-to-face}), nos quais o servidor recebe os dados da falha, agenda a janela de atendimento em oficinas credenciadas e acompanha a execução do reparo; \texttt{PAT12} (\texttt{F0097}) fornece assistência remota à manutenção, \texttt{PAT63} (\texttt{F0024}, 2025) otimiza a seleção de oficinas para reparo emergencial de pneus e \texttt{PAT08} (\texttt{F0062}, 2024) gerencia o compartilhamento regional de recursos de reparo em nuvem.
+
+\paragraph{3. Categoria C3 -- Orçamentação automatizada e estimativa de custos de reparo veicular (17 famílias; 22,4\%):}
+Aborda mecanismos computacionais para reduzir a incerteza de preços antes da contratação do serviço mecânico. Documentos como \texttt{PAT47} (\texttt{F0536}), \texttt{PAT55} (\texttt{F0588}), \texttt{PAT60} (\texttt{F0620}) e \texttt{PAT69} (\textit{Shzoom}, \texttt{F0733}) coletam o número de identificação do veículo (VIN) e sintomas da avaria para gerar cotações comparativas entre múltiplas oficinas. Em evolução recente, \texttt{PAT11} (\textit{Shenzhen Launch Tech}, \texttt{F0025}, 2025, com grandes modelos de IA), \texttt{PAT14} (\textit{Samsung Fire \& Marine}, \texttt{F0147}), \texttt{PAT15} (\texttt{F0156}), \texttt{PAT26} (\textit{Mitchell International}, \texttt{F0309}), \texttt{PAT33} (\texttt{F0366}), \texttt{PAT53} (\texttt{F0578}) e \texttt{PAT65} (\textit{Toyota}, \texttt{F0660}) aplicam visão computacional sobre fotografias do veículo avariado ou modelos preditivos sobre bases históricas de colisão para estimar automaticamente o custo de peças e mão de obra.
+
+\paragraph{4. Categoria C4 -- Despacho em lotes, escalonamento de equipes móveis e precificação dinâmica em FSM análogo (13 famílias; 17,1\%):}
+Agrupa as patentes análogas de serviços de campo (\textit{field service}) e plataformas sob demanda que detalham formulações de otimização operacional. \texttt{PAT23} (\texttt{F0277}), \texttt{PAT39} (\textit{Didi}, \texttt{F0430}), \texttt{PAT44} (\textit{GrabTaxi}, \texttt{F0478}) e \texttt{PAT45} (\textit{Didi}, \texttt{F0493}) descrevem métodos de alocação de pedidos em lotes dinâmicos (\textit{dynamically batched service providers}) e emparelhamento bipartido entre múltiplos solicitantes e prestadores móveis; \texttt{PAT20} (\texttt{F0214}), \texttt{PAT25} (\texttt{F0296}, depositantes pessoas físicas), \texttt{PAT50} (\textit{IBM}, \texttt{F0560}), \texttt{PAT64} (\texttt{F0658}), \texttt{PAT66} (\texttt{F0033}, 2025) e \texttt{PAT70} (\textit{CertusView}, \texttt{F0739}) tratam da programação e atualização em tempo real de agendas e rotas de técnicos de campo (\textit{Mobile Workforce Scheduling Problem}) sob restrições de janela de tempo e habilidade técnica; e \texttt{PAT09} (\texttt{F0063}, 2024) descreve um método específico de determinação dinâmica de preços para prestadores em plataforma de serviços.
+
+\subsection{Resposta à questão de pesquisa primária}
+\paragraph{QPP: Qual o panorama de pedidos de patente sobre plataformas de serviços sob demanda, em especial de serviços automotivos?}
+A consolidação de 1.851 registros brutos em 76 documentos aprovados revela um panorama caracterizado por três aspectos principais: (1) concentração geográfica e corporativa nos Estados Unidos (48,7\% da origem dos titulares e 53,9\% dos escritórios receptores), China (22,4\% da origem) e Coreia do Sul (15,8\%), com participação empresarial em 65,8\% das famílias e destaque para seguradoras automotivas (21,1\% do corpus) sob a subclasse \texttt{G06Q} (89,5\%); (2) complementaridade em relação ao estado da arte científico (DIAS, 2026): enquanto nos artigos científicos predominam modelos matemáticos de roteamento VRP (73,9\%) e precificação dinâmica (42,0\%), nas patentes automotivas predominam fluxos de despacho de socorro e reboque integrados a seguros e telemetria (Categoria C1; 36,8\%), plataformas de agendamento e busca de oficinas (Categoria C2; 23,7\%) e sistemas de estimativa automatizada de custos de reparo por imagem ou IA (Categoria C3; 22,4\%), ficando os algoritmos de emparelhamento em lotes e precificação dinâmica concentrados nos sistemas análogos de serviços de campo (Categoria C4; 17,1\%); e (3) baixa incidência de depósitos na base nacional do INPI, onde nenhuma das 75 famílias internacionais aprovadas possui membro de família registrado e o único pedido nacional aprovado (\texttt{PAT76}) volta-se à localização de estabelecimentos de peças e manutenção, indicando espaço para o desenvolvimento técnico do IMecanic no Brasil.
+
+\section{Ameaças à Validade e Limitações do Estudo}
+
+O protocolo seguiu as diretrizes de Petersen et al. (2008) e Petersen, Vakkalanka e Kuzniarz (2015), mas os resultados devem ser interpretados considerando sete ameaças à validade e limitações metodológicas:
+\begin{enumerate}
+    \item \textbf{Triagem baseada em título e resumo e condução por revisor principal (Validade Interna):} devido ao volume de 1.661 famílias e pedidos únicos, aplicou-se uma pré-triagem léxica em Python (auditada em amostragem aleatória de 10\% = 63 famílias das 628 excluídas automaticamente), seguida da avaliação manual das 248 famílias internacionais não excluídas e dos 16 pedidos prioritários do INPI pelo primeiro autor sob supervisão metodológica da coautora. Como a avaliação baseou-se nos títulos, resumos e códigos CIP/CPC (sem leitura exaustiva do quadro reivindicatório completo de cada jurisdição), detalhes algorítmicos descritos apenas no relatório descritivo longo podem não ter sido capturados na pontuação de QQ3.
+    \item \textbf{Heurística de consolidação das famílias órfãs do Patentscope (Validade de Construção):} para os 215 registros do Patentscope sem correspondência direta de número de publicação no Espacenet, o agrupamento preliminar em 133 famílias utilizou a igualdade normalizada de título e depositante, complementada pela fusão manual de 70 continuações e fases nacionais (CE04) na etapa de leitura das 248 famílias. Variações de tradução de títulos em famílias não lidas na etapa manual podem gerar residual de fragmentação.
+    \item \textbf{Inferência do país de origem do depositante (Validade de Construção):} em 405 das 876 famílias internacionais brutas (46,2\%) e em 26 das 76 aprovadas (34,2\%), a ausência do código ISO do país do titular na exportação exigiu inferir a origem pelo escritório nacional do depósito prioritário. Embora todas as ocorrências estejam sinalizadas na planilha suplementar, depósitos diretos de titulares estrangeiros em escritórios como USPTO ou CNIPA podem introduzir viés nessa variável.
+    \item \textbf{Limitações de sintaxe e metadados da base do INPI (Validade de Construção):} a interface pePI do INPI exige expressões com truncamento e operadores específicos e exporta apenas número do pedido, data, título e código IPC (sem resumo em lote), o que exigiu filtragem preliminar por título e classe antes da consulta individual aos resumos no portal.
+    \item \textbf{Natureza do depositante e titularidade (Validade de Mensuração):} em algumas famílias, especialmente em registros antigos de jurisdições como os Estados Unidos, a exportação pode apresentar inventores como depositantes sem explicitar a empresa cessionária. A classificação como pessoa física pode, portanto, subestimar a participação empresarial; o caso de \texttt{PAT25}, com três inventores e membros de família em US, EP, JP e DE, recomenda cautela na interpretação dessa variável.
+    \item \textbf{Viés de idioma e cobertura de bases (Validade Externa):} as buscas utilizaram termos em inglês e português no Patentscope, Espacenet e INPI. Pedidos depositados exclusivamente em escritórios asiáticos (como CNIPA, JPO e KIPO) que não possuam tradução indexada em inglês no Espacenet ou no \textit{Google Patents Public Data} podem estar sub-representados.
+    \item \textbf{Período legal de sigilo de 18 meses (Validade Externa):} conforme o art. 30 da Lei nº 9.279/1996 (BRASIL, 1996) e regras equivalentes internacionais, pedidos depositados entre maio de 2025 e novembro de 2026 permanecem em sigilo, reduzindo a contagem observada nos dois últimos anos da série (QPS1).
+    \item \textbf{Distinção entre patentes depositadas, vigência legal e liberdade de operação (Limitação Jurídica):} este estudo mapeia documentos de patentes \textbf{depositadas} (estado da técnica), sem aferir o status administrativo de concessão, indeferimento, arquivamento ou domínio público de cada pedido, nem realizar análise de infração de reivindicações independentes. Portanto, os resultados têm finalidade acadêmica e prospectiva, não substituindo uma busca formal de anterioridade ou parecer jurídico de liberdade de operação (\textit{Freedom to Operate} -- FTO) emitido por profissional habilitado.
+\end{enumerate}
+
+\section{Conclusões}
+
+A motivação deste estudo foi apoiar o desenvolvimento da plataforma IMecanic com o mapeamento do conhecimento tecnológico divulgado em bases de patentes. Assim, este artigo teve como objetivo realizar um mapeamento sistemático do estado da técnica em documentos de patentes depositadas sobre plataformas de serviços automotivos sob demanda e sistemas correlatos de gerenciamento de serviços de campo, apresentando um panorama quantitativo e técnico do tema. Seguindo as diretrizes de Petersen et al. (2008) e Petersen, Vakkalanka e Kuzniarz (2015), foram consolidados 1.851 registros brutos em 1.661 famílias e pedidos únicos nas bases Espacenet, Patentscope e INPI, dos quais 98 atenderam aos critérios de inclusão e exclusão e 76 atingiram a nota de corte nas questões de qualidade ($\text{QQ} \ge 3{,}5$, sendo 40 com nota $4{,}0$ e 36 com nota $3{,}5$).
+
+Em resposta às questões secundárias estatísticas, constatou-se que: (QPS1) os depósitos aprovados abrangem o intervalo de 2000 a 2026, concentrando 59 famílias (77,6\%) entre 2014 e 2024, com pico em 2020 (9 famílias; 11,8\%); (QPS2) como escritório receptor, lideram Estados Unidos (41 famílias; 53,9\%), China (18; 23,7\%), Coreia do Sul (13; 17,1\%) e Canadá (12; 15,8\%), com uso do sistema PCT em 10 famílias (13,2\%) e apenas um pedido aprovado depositado no Brasil (\texttt{PAT76}); (QPS3) quanto ao país de origem do depositante, predominam Estados Unidos (37 famílias; 48,7\%), China (17; 22,4\%) e Coreia do Sul (12; 15,8\%); (QPS4) empresas isoladas (44 famílias; 57,9\%) ou em cotitularidade com inventores (6; 7,9\%) respondem por 50 famílias (65,8\%), destacando-se seguradoras automotivas (14 famílias; 18,4\%), das quais 10 pertencem à \textit{Allstate} e 11 ao grupo Allstate/Esurance, enquanto inventores individuais detêm 22 famílias (28,9\%) e instituições de ensino detêm 4 (5,3\%); e (QPS5) na classificação internacional predominam as subclasses \texttt{G06Q} (68 famílias; 89,5\%, sobretudo nos grupos \texttt{30/02}, \texttt{10/20} e \texttt{10/06}), \texttt{H04W} (21; 27,6\%), \texttt{G06F} (16; 21,1\%), \texttt{G07C}/\texttt{B60R} (15; 19,7\%) e \texttt{G08G} (14; 18,4\%).
+
+Quanto à questão técnica (QPS6) e à Questão Primária (QPP), verificou-se que 63 das 76 patentes aprovadas (82,9\%) atuam diretamente no domínio automotivo --- divididas entre despacho geolocalizado de socorro e reboque (Categoria C1: 28 famílias; 36,8\%), plataformas de intermediação e agendamento de oficinas (Categoria C2: 18 famílias; 23,7\%, incluindo \texttt{PAT76}) e sistemas de orçamentação automatizada de reparos por imagem ou IA (Categoria C3: 17 famílias; 22,4\%) ---, ao passo que algoritmos explícitos de alocação em lotes, escalonamento dinâmico de equipes e precificação em tempo real concentram-se nas 13 patentes análogas de serviços de campo (Categoria C4: 13 famílias; 17,1\%).
+
+A baixa incidência observada no INPI deve ser interpretada estritamente no escopo da string de busca aplicada aos títulos e resumos, não como evidência de inexistência de soluções nacionais. A principal contribuição do trabalho consiste em disponibilizar uma base auditável de 1.661 famílias e pedidos únicos que articula as evidências do estado da técnica patentário com o estado da arte científico previamente mapeado (DIAS, 2026), demonstrando que na base nacional do INPI há baixa incidência de pedidos depositados sobre despacho dinâmico e cotação prévia para mecânicos autônomos móveis. Como limitações, destacam-se a triagem baseada em título e resumo, a inferência do país de origem pelo escritório prioritário em 26 das 76 famílias aprovadas e o caráter prospectivo (não jurídico) da análise de patentes depositadas. Como trabalhos futuros, propõe-se: (i) integrar os requisitos funcionais identificados nas Categorias C1 a C4 à especificação arquitetural e ao protótipo do IMecanic; (ii) realizar a leitura integral do quadro reivindicatório das patentes de nota máxima ($\text{QQ} = 4{,}0$) para detalhamento de mecanismos de cotação; e (iii) encaminhar a proteção dos ativos intangíveis do IMecanic no Brasil mediante registro de programa de computador e de marca junto ao INPI.
+
+\section*{Declaração de Uso de IA Generativa}
+Ferramentas de Inteligência Artificial Generativa (Google Gemini e Anthropic Claude) foram utilizadas como suporte na elaboração de \textit{scripts} em Python para consolidação das famílias de patentes, consulta automatizada de resumos na base pública \textit{Google Patents Public Data} (BigQuery), aplicação de regras léxicas de pré-triagem, geração dos gráficos em TikZ/Python e revisão de formatação em \LaTeX. O desenho do protocolo metodológico, a execução das buscas nas bases oficiais, a leitura e validação manual das 248 famílias pré-triadas e dos pedidos prioritários do INPI, a atribuição das notas de qualidade (QQ1 a QQ4), a categorização funcional (C1 a C4) e a interpretação dos resultados foram conduzidos pelo autor sob supervisão metodológica da coautora.
+
+\section*{Referências}
+\begingroup
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+\hangindent=1.2em ARAUJO, R.; ALVES, A.; GOUVEA, M. T.; ANASTASSIU, M.; GOMES, S.; FRATTINI, V. Levantamento de informação tecnológica para pesquisa: uma proposta de sistematização. \textit{Relatórios Técnicos do Departamento de Informática Aplicada da UNIRIO}, Rio de Janeiro, v. 11, n. 1, p. 1--28, 2018.
+
+\hangindent=1.2em BRASIL. Lei nº 9.279, de 14 de maio de 1996. Regula direitos e obrigações relativos à propriedade industrial. \textit{Diário Oficial da União}: seção 1, Brasília, DF, p. 8353, 15 maio 1996.
+
+\hangindent=1.2em DIAS, D. A. R. \textit{Mapeamento Sistemático da Literatura: Arquiteturas e Algoritmos de Despacho para Plataformas de Serviços Automotivos sob Demanda}. Artigo (Disciplina de Metodologia Científica e Tecnológica) -- Universidade Federal do Estado do Rio de Janeiro (UNIRIO), Rio de Janeiro, 2026.
+
+\hangindent=1.2em EUROPEAN PATENT OFFICE. \textit{Espacenet Patent Search}. Munich: EPO, 2026. Disponível em: $<$\url{https://worldwide.espacenet.com}$>$. Acesso em: 08 nov. 2026.
+
+\hangindent=1.2em FELIZARDO, K. R.; NAKAGAWA, E. Y.; FABBRI, S. C. P. F.; FERRARI, F. C. \textit{Revisão Sistemática da Literatura em Engenharia de Software: Teoria e Prática}. Rio de Janeiro: Elsevier, 2017.
+
+\hangindent=1.2em GOOGLE. \textit{Google Patents Public Data on BigQuery (publications dataset)}. Mountain View: Google Cloud, 2026. Disponível em: $<$\url{https://console.cloud.google.com/marketplace/product/google_patents_public_datasets/google-patents-public-data}$>$. Acesso em: 08 nov. 2026.
+
+\hangindent=1.2em INSTITUTO NACIONAL DA PROPRIEDADE INDUSTRIAL. \textit{Base de Dados de Patentes (Portal pePI)}. Rio de Janeiro: INPI, 2026. Disponível em: $<$\url{https://busca.inpi.gov.br/pePI/}$>$. Acesso em: 08 nov. 2026.
+
+\hangindent=1.2em KITCHENHAM, B. \textit{Procedures for performing systematic reviews}. Keele: Keele University, 2004. (Technical Report TR/SE-0401).
+
+\hangindent=1.2em NUNES, M. A. S. N.; PINHEIRO-MACHADO, R. Propriedade intelectual, empreendedorismo e busca de informação tecnológica para a informática na educação. In: PIMENTEL, M.; SAMPAIO, F. F.; SANTOS, E. O. (Org.). \textit{Informática na Educação: técnicas e tecnologias computacionais}. Porto Alegre: Sociedade Brasileira de Computação (SBC), 2021.
+
+\hangindent=1.2em PETERSEN, K.; FELDT, R.; MUJTABA, S.; MATTSSON, M. Systematic mapping studies in software engineering. In: INTERNATIONAL CONFERENCE ON EVALUATION AND ASSESSMENT IN SOFTWARE ENGINEERING (EASE), 12., 2008, Bari. \textit{Proceedings...} Swindon: BCS Learning \& Development, 2008. p. 68--77.
+
+\hangindent=1.2em PETERSEN, K.; VAKKALANKA, S.; KUZNIARZ, L. Guidelines for conducting systematic mapping studies in software engineering: an update. \textit{Information and Software Technology}, Amsterdam, v. 64, p. 1--18, 2015.
+
+\hangindent=1.2em SILVA, I. S. et al. \textit{Almanaque para Popularização de Ciência da Computação, Série 6: Metodologia Científica e Tecnológica}. Porto Alegre: Sociedade Brasileira de Computação (SBC), 2018.
+
+\hangindent=1.2em WANG, H.; YANG, H. Ridesourcing systems: a framework and review. \textit{Transportation Research Part B: Methodological}, Amsterdam, v. 129, p. 122--155, 2019.
+
+\hangindent=1.2em WORLD INTELLECTUAL PROPERTY ORGANIZATION. \textit{International Patent Classification (IPC)}. Geneva: WIPO, 2026a. Disponível em: $<$\url{https://www.wipo.int/classifications/ipc/}$>$. Acesso em: 08 nov. 2026.
+
+\hangindent=1.2em WORLD INTELLECTUAL PROPERTY ORGANIZATION. \textit{Patentscope Database}. Geneva: WIPO, 2026b. Disponível em: $<$\url{https://patentscope.wipo.int}$>$. Acesso em: 08 nov. 2026.
+
+\endgroup
+\end{document}

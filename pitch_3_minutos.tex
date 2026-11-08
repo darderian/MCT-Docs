@@ -1,0 +1,99 @@
+\documentclass[aspectratio=169,10pt]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{booktabs,tabularx,tikz}
+\usetheme{Madrid}
+\usetikzlibrary{positioning}
+\usecolortheme{default}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+\definecolor{unirioazul}{RGB}{0,51,102}
+\setbeamercolor{structure}{fg=unirioazul}
+\setbeamercolor{frametitle}{bg=unirioazul,fg=white}
+\title[IMecanic]{IMecanic: do estado da arte ao estado da técnica}
+\subtitle{Evidências científicas e patentárias para orientar uma plataforma automotiva sob demanda}
+\author{Diogo Antônio Rodrigues Dias}
+\institute{UNIRIO -- Metodologia Científica e Tecnológica}
+\date{Novembro de 2026}
+\begin{document}
+\begin{frame}\titlepage\end{frame}
+\begin{frame}{1. O problema e a lacuna tecnológica}
+\begin{columns}[T]
+\begin{column}{.55\textwidth}
+\Large O mercado de assistência e manutenção automotiva é fragmentado.\vspace{.3cm}
+\normalsize Clientes têm dificuldade para localizar prestadores, comparar preços e acompanhar o atendimento. Mecânicos e oficinas enfrentam ociosidade e baixa visibilidade digital.
+\end{column}
+\begin{column}{.4\textwidth}
+\begin{block}{IMecanic}
+Uma plataforma para conectar condutores a mecânicos autônomos e oficinas, com geolocalização, despacho, agendamento e orçamento.
+\end{block}
+\end{column}
+\end{columns}
+\vspace{.3cm}
+\small A pergunta central: quais soluções já foram estudadas e quais já aparecem protegidas ou descritas em documentos de patente?
+\end{frame}
+\begin{frame}{2. Estado da arte: o que a pesquisa científica indica?}
+\begin{center}\Large Mapeamento Sistemático da Literatura: 69 estudos primários\end{center}
+\vspace{.2cm}
+\begin{columns}[T]
+\begin{column}{.32\textwidth}\centering\Huge 82,6\%\\\normalsize arquiteturas em nuvem, microsserviços e/ou APIs REST\end{column}
+\begin{column}{.32\textwidth}\centering\Huge 73,9\%\\\normalsize formulações de roteamento de veículos (VRP)\end{column}
+\begin{column}{.32\textwidth}\centering\Huge 42,0\%\\\normalsize precificação dinâmica e/ou agendamento em janela móvel\end{column}
+\end{columns}
+\vspace{.5cm}
+\begin{alertblock}{Leitura para o projeto}
+A literatura oferece modelos e arquiteturas para coordenar serviços móveis. Faltava confrontar esse conhecimento com as soluções efetivamente descritas em documentos patentários.
+\end{alertblock}
+\end{frame}
+\begin{frame}{3. Estado da técnica: como foi feito o mapeamento?}
+\begin{itemize}
+\item Bases: Espacenet, Patentscope/OMPI e INPI; Google Patents/BigQuery foi apoio complementar para recuperar resumos.
+\item Busca e consolidação: 1.851 registros brutos, reduzidos a 1.661 famílias e pedidos únicos.
+\item Triagem por critérios de inclusão/exclusão e leitura de título e resumo; 98 documentos elegíveis.
+\item Avaliação por quatro questões de qualidade; corte de 3,5/4,0: 76 documentos aprovados.
+\end{itemize}
+\begin{center}
+\begin{tikzpicture}[node distance=.55cm, every node/.style={draw,rounded corners,align=center,minimum height=.7cm,font=\small}]
+\node (a) {1.851 registros};
+\node[right=of a] (b) {1.661 famílias/ pedidos};
+\node[right=of b] (c) {98 elegíveis};
+\node[right=of c] (d) {76 aprovados};
+\draw[->,thick] (a)--(b);\draw[->,thick] (b)--(c);\draw[->,thick] (c)--(d);
+\end{tikzpicture}
+\end{center}
+\small O corpus reúne documentos depositados; não equivale a uma análise jurídica de vigência ou liberdade de operação.
+\end{frame}
+\begin{frame}{4. O que as patentes revelam e o que isso muda no IMecanic?}
+\begin{columns}[T]
+\begin{column}{.52\textwidth}
+\textbf{Distribuição funcional das 76 famílias}
+\begin{itemize}
+\item C1 -- despacho de socorro/reboque: 28 (36,8\%).
+\item C2 -- intermediação e agenda de oficinas: 18 (23,7\%).
+\item C3 -- orçamento e estimativa de reparo: 17 (22,4\%).
+\item C4 -- equipes móveis e preço dinâmico: 13 (17,1\%).
+\end{itemize}
+\end{column}
+\begin{column}{.44\textwidth}
+\textbf{Sinais técnicos}
+\begin{itemize}
+\item G06Q: 68 famílias (89,5\%).
+\item H04W: 21 (27,6\%).
+\item G06F: 16 (21,1\%).
+\item G07C/B60R: 15 (19,7\%).
+\end{itemize}
+\end{column}
+\end{columns}
+\begin{block}{Direcionamento}
+Priorizar matching geolocalizado, despacho e acompanhamento; integrar agenda e orçamento comparável; tratar alocação dinâmica e precificação como módulos avançados. Fazer análise de reivindicações antes de decisões de implementação ou proteção.
+\end{block}
+\end{frame}
+\begin{frame}{Conclusão}
+\Large O estado da arte mostra como construir sistemas de serviços móveis. O estado da técnica mostra que despacho, localização, intermediação e orçamento já aparecem em soluções patentárias.\vspace{.4cm}
+\normalsize A contribuição do mapeamento é transformar essas evidências em requisitos e pontos de atenção para o IMecanic, sem confundir panorama tecnológico com parecer de liberdade de operação.\vspace{.4cm}
+\centering\textbf{IMecanic: desenvolver com base na evidência, diferenciar com clareza e avaliar proteção com análise especializada.}
+\end{frame}
+\end{document}
